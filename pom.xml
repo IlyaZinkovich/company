@@ -14,6 +14,7 @@
         <module>company-service</module>
         <module>company-metadata</module>
         <module>company-app</module>
+        <module>company-rest</module>
     </modules>
 
     <properties>
@@ -35,6 +36,8 @@
         <hsqldb.version>2.3.3</hsqldb.version>
         <jta.version>1.1</jta.version>
         <junit.version>4.12</junit.version>
+        <validation.version>1.1.0.Final</validation.version>
+        <hibernate.validator.version>5.2.2.Final</hibernate.validator.version>
     </properties>
 
     <dependencyManagement>
