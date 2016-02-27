@@ -12,7 +12,6 @@
         <module>company-dao</module>
         <module>company-model</module>
         <module>company-service</module>
-        <module>company-api</module>
         <module>company-metadata</module>
         <module>company-app</module>
     </modules>

@@ -27,7 +27,7 @@ public class AppConfig {
     @Bean
     public Endpoint companyWebService() {
         EndpointImpl endpoint = new EndpointImpl(bus, companyWebService);
-        endpoint.publish("/company");
+        endpoint.publish("/");
         return endpoint;
     }
 

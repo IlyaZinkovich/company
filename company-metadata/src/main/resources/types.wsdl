@@ -1,0 +1,45 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://api.company.epam.com/" name="CompanyService" targetNamespace="http://api.company.epam.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://api.company.epam.com/" elementFormDefault="unqualified" targetNamespace="http://api.company.epam.com/" version="1.0">
+            <xs:element name="Company" type="tns:company"/>
+            <xs:element name="createCompany" type="tns:createCompany"/>
+            <xs:element name="createCompanyResponse" type="tns:createCompanyResponse"/>
+            <xs:complexType name="createCompany">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:company"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="company">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="address" type="xs:string"/>
+                    <xs:element minOccurs="0" name="addressLine1" type="xs:string"/>
+                    <xs:element minOccurs="0" name="addressLine2" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cityName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="corporateId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="countryCode" type="xs:string"/>
+                    <xs:element minOccurs="0" name="employeeCount" type="xs:long"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
+                    <xs:element minOccurs="0" name="stateCode" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="createCompanyResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="createCompany">
+        <wsdl:part element="ns1:createCompany" name="parameters"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createCompanyResponse">
+        <wsdl:part element="ns1:createCompanyResponse" name="parameters"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="CompanyService">
+        <wsdl:operation name="createCompany">
+            <wsdl:input message="ns1:createCompany" name="createCompany"></wsdl:input>
+            <wsdl:output message="ns1:createCompanyResponse" name="createCompanyResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
