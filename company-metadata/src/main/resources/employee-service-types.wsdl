@@ -1,0 +1,115 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://metadata.company.epam.com/" name="EmployeeWebService" targetNamespace="http://metadata.company.epam.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://metadata.company.epam.com/"
+                   elementFormDefault="unqualified" targetNamespace="http://metadata.company.epam.com/" version="1.0">
+            <xs:include schemaLocation="model-types.xsd"/>
+            <xs:element name="EmployeeDTO" type="tns:EmployeeDTO"/>
+            <xs:element name="createEmployeeRequest" type="tns:createEmployeeRequest"/>
+            <xs:element name="createEmployeeResponse" type="tns:createEmployeeResponse"/>
+            <xs:complexType name="createEmployeeRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:EmployeeDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="createEmployeeResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="getEmployeeByIdRequest" type="tns:getEmployeeByIdRequest"/>
+            <xs:element name="getEmployeeByIdResponse" type="tns:getEmployeeByIdResponse"/>
+            <xs:complexType name="getEmployeeByIdRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getEmployeeByIdResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:EmployeeDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="getAllEmployeesRequest" type="tns:getAllEmployeesRequest"/>
+            <xs:element name="getAllEmployeesResponse" type="tns:getAllEmployeesResponse"/>
+            <xs:complexType name="getAllEmployeesRequest">
+            </xs:complexType>
+            <xs:complexType name="getAllEmployeesResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" maxOccurs="unbounded" type="tns:EmployeeDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="updateEmployeeRequest" type="tns:updateEmployeeRequest"/>
+            <xs:element name="updateEmployeeResponse" type="tns:updateEmployeeResponse"/>
+            <xs:complexType name="updateEmployeeRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:EmployeeDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="updateEmployeeResponse">
+            </xs:complexType>
+            <xs:element name="getEmployeesByCompanyIdRequest" type="tns:getEmployeesByCompanyIdRequest"/>
+            <xs:element name="getEmployeesByCompanyIdResponse" type="tns:getEmployeesByCompanyIdResponse"/>
+            <xs:complexType name="getEmployeesByCompanyIdRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getEmployeesByCompanyIdResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="arg0" type="tns:EmployeeDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="createEmployeeRequest">
+        <wsdl:part element="ns1:createEmployeeRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="createEmployeeResponse">
+        <wsdl:part element="ns1:createEmployeeResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeByIdRequest">
+        <wsdl:part element="ns1:getEmployeeByIdRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeByIdResponse">
+        <wsdl:part element="ns1:getEmployeeByIdResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getAllEmployeesRequest">
+        <wsdl:part element="ns1:getAllEmployeesRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getAllEmployeesResponse">
+        <wsdl:part element="ns1:getAllEmployeesResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateEmployeeRequest">
+        <wsdl:part element="ns1:updateEmployeeRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateEmployeeResponse">
+        <wsdl:part element="ns1:updateEmployeeResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeesByCompanyIdRequest">
+        <wsdl:part element="ns1:getEmployeesByCompanyIdRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeesByCompanyIdResponse">
+        <wsdl:part element="ns1:getEmployeesByCompanyIdResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="EmployeeWebService">
+        <wsdl:operation name="createEmployee">
+            <wsdl:input message="ns1:createEmployeeRequest" name="createEmployeeRequest"/>
+            <wsdl:output message="ns1:createEmployeeResponse" name="createEmployeeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeById">
+            <wsdl:input message="ns1:getEmployeeByIdRequest" name="getEmployeeByIdRequest"/>
+            <wsdl:output message="ns1:getEmployeeByIdResponse" name="getEmployeeByIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllEmployees">
+            <wsdl:input message="ns1:getAllEmployeesRequest" name="getAllEmployeesRequest"/>
+            <wsdl:output message="ns1:getAllEmployeesResponse" name="getAllEmployeesResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateEmployee">
+            <wsdl:input message="ns1:updateEmployeeRequest" name="updateEmployeeRequest"/>
+            <wsdl:output message="ns1:updateEmployeeResponse" name="updateEmployeeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeesByCompanyId">
+            <wsdl:input message="ns1:getEmployeesByCompanyIdRequest" name="getEmployeesByCompanyIdRequest"/>
+            <wsdl:output message="ns1:getEmployeesByCompanyIdResponse" name="getEmployeesByCompanyIdResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
