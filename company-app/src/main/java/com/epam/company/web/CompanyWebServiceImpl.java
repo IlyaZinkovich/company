@@ -27,12 +27,22 @@ public class CompanyWebServiceImpl implements CompanyWebService {
 
     @Override
     public UpdateCompanyResponse updateCompany(@WebParam(partName = "parameters", name = "updateCompanyRequest", targetNamespace = "http://metadata.company.epam.com/") UpdateCompanyRequest parameters) {
-        return null;
+        CompanyDTO companyDTO = parameters.getReturn();
+        Company company = new Company();
+        mapper.map(companyDTO, company);
+        companyService.updateCompany(company);
+        return new UpdateCompanyResponse();
     }
 
     @Override
     public GetCompanyByIdResponse getCompanyById(@WebParam(partName = "parameters", name = "getCompanyByIdRequest", targetNamespace = "http://metadata.company.epam.com/") GetCompanyByIdRequest parameters) {
-        return null;
+        Long companyId = parameters.getArg0();
+        Company company = companyService.getCompanyById(companyId);
+        CompanyDTO companyDTO = new CompanyDTO();
+        mapper.map(company, companyDTO);
+        GetCompanyByIdResponse getCompanyByIdResponse = new GetCompanyByIdResponse();
+        getCompanyByIdResponse.setArg0(companyDTO);
+        return getCompanyByIdResponse;
     }
 
     @Override
