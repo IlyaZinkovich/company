@@ -18,32 +18,32 @@ public class EmployeeResource {
     public List<EmployeeDTO> getAllEmployees() {
         GetAllEmployeesRequest request = new GetAllEmployeesRequest();
         GetAllEmployeesResponse response = client.getEmployeeWebServiceImplPort().getAllEmployees(request);
-        return response.getReturn();
+        return response.getEmployeeDTOList();
     }
 
     @GET
     public List<EmployeeDTO> getEmployeesByCompanyId(@PathParam("companyId") Long companyId) {
         GetEmployeesByCompanyIdRequest request = new GetEmployeesByCompanyIdRequest();
-        request.setArg0(companyId);
+        request.setCompanyId(companyId);
         GetEmployeesByCompanyIdResponse response = client.getEmployeeWebServiceImplPort().getEmployeesByCompanyId(request);
-        return response.getArg0();
+        return response.getEmployeeDTOList();
     }
 
     @GET
     @Path("/{employeeId}")
     public EmployeeDTO getEmployeeById(@PathParam("employeeId") Long employeeId) {
         GetEmployeeByIdRequest request = new GetEmployeeByIdRequest();
-        request.setArg0(employeeId);
+        request.setEmployeeId(employeeId);
         GetEmployeeByIdResponse response = client.getEmployeeWebServiceImplPort().getEmployeeById(request);
-        return response.getArg0();
+        return response.getEmployeeDTO();
     }
 
     @POST
     public Long createEmployee(EmployeeDTO employeeDTO) {
         CreateEmployeeRequest request = new CreateEmployeeRequest();
-        request.setArg0(employeeDTO);
+        request.setEmployeeDTO(employeeDTO);
         CreateEmployeeResponse response = client.getEmployeeWebServiceImplPort().createEmployee(request);
-        return response.getReturn();
+        return response.getEmployeeId();
     }
 
     @PUT
@@ -51,7 +51,7 @@ public class EmployeeResource {
     public void updateEmployee(@PathParam("employeeId") Long employeeId, EmployeeDTO employeeDTO) {
         employeeDTO.setEmployeeId(employeeId);
         UpdateEmployeeRequest request = new UpdateEmployeeRequest();
-        request.setReturn(employeeDTO);
+        request.setEmployeeDTO(employeeDTO);
         UpdateEmployeeResponse response = client.getEmployeeWebServiceImplPort().updateEmployee(request);
     }
 }

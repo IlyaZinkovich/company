@@ -23,25 +23,25 @@ public class CompanyRestService {
     @POST
     public Long createCompany(CompanyDTO companyDTO) {
         CreateCompanyRequest request = new CreateCompanyRequest();
-        request.setArg0(companyDTO);
+        request.setCompanyDTO(companyDTO);
         CreateCompanyResponse response = client.getCompanyWebServiceImplPort().createCompany(request);
-        return response.getReturn();
+        return response.getCompanyId();
     }
 
     @GET
     @Path("/{companyId}")
     public CompanyDTO getCompanyById(@PathParam("companyId") Long companyId) {
         GetCompanyByIdRequest request = new GetCompanyByIdRequest();
-        request.setArg0(companyId);
+        request.setCompanyId(companyId);
         GetCompanyByIdResponse response = client.getCompanyWebServiceImplPort().getCompanyById(request);
-        return  response.getArg0();
+        return  response.getCompanyDTO();
     }
 
     @GET
     public List<CompanyDTO> getAllCompanies() {
         GetAllCompaniesRequest request = new GetAllCompaniesRequest();
         GetAllCompaniesResponse response = client.getCompanyWebServiceImplPort().getAllCompanies(request);
-        return response.getReturn();
+        return response.getCompanyDTOList();
     }
 
     @PUT
@@ -49,7 +49,7 @@ public class CompanyRestService {
     public void updateCompany(@PathParam("companyId") Long companyId, CompanyDTO companyDTO) {
         companyDTO.setCompanyId(companyId);
         UpdateCompanyRequest request = new UpdateCompanyRequest();
-        request.setReturn(companyDTO);
+        request.setCompanyDTO(companyDTO);
         UpdateCompanyResponse response = client.getCompanyWebServiceImplPort().updateCompany(request);
     }
 

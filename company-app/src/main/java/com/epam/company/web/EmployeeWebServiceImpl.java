@@ -25,36 +25,36 @@ public class EmployeeWebServiceImpl implements EmployeeWebService {
 
     @Override
     public GetEmployeeByIdResponse getEmployeeById(@WebParam(partName = "parameters", name = "getEmployeeByIdRequest", targetNamespace = "http://metadata.company.epam.com/") GetEmployeeByIdRequest parameters) {
-        Long employeeId = parameters.getArg0();
+        Long employeeId = parameters.getEmployeeId();
         Employee employee = employeeService.getEmployeeById(employeeId);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         mapper.map(employee, employeeDTO);
         GetEmployeeByIdResponse response = new GetEmployeeByIdResponse();
-        response.setArg0(employeeDTO);
+        response.setEmployeeDTO(employeeDTO);
         return response;
     }
 
     @Override
     public GetEmployeesByCompanyIdResponse getEmployeesByCompanyId(@WebParam(partName = "parameters", name = "getEmployeesByCompanyIdRequest", targetNamespace = "http://metadata.company.epam.com/") GetEmployeesByCompanyIdRequest parameters) {
-        Long companyId = parameters.getArg0();
+        Long companyId = parameters.getCompanyId();
         List<Employee> employees = employeeService.getEmployeesByCompanyId(companyId);
         GetEmployeesByCompanyIdResponse response = new GetEmployeesByCompanyIdResponse();
         employees.forEach(employee -> {
             EmployeeDTO employeeDTO = new EmployeeDTO();
             mapper.map(employee, employeeDTO);
-            response.getArg0().add(employeeDTO);
+            response.getEmployeeDTOList().add(employeeDTO);
         });
         return response;
     }
 
     @Override
     public CreateEmployeeResponse createEmployee(@WebParam(partName = "parameters", name = "createEmployeeRequest", targetNamespace = "http://metadata.company.epam.com/") CreateEmployeeRequest parameters) {
-        EmployeeDTO employeeDTO = parameters.getArg0();
+        EmployeeDTO employeeDTO = parameters.getEmployeeDTO();
         Employee employee = new Employee();
         mapper.map(employeeDTO, employee);
         Long employeeId = employeeService.createEmployee(employee);
         CreateEmployeeResponse response = new CreateEmployeeResponse();
-        response.setReturn(employeeId);
+        response.setEmployeeId(employeeId);
         return response;
     }
 
@@ -65,14 +65,14 @@ public class EmployeeWebServiceImpl implements EmployeeWebService {
         employees.forEach(employee -> {
             EmployeeDTO employeeDTO = new EmployeeDTO();
             mapper.map(employee, employeeDTO);
-            response.getReturn().add(employeeDTO);
+            response.getEmployeeDTOList().add(employeeDTO);
         });
         return response;
     }
 
     @Override
     public UpdateEmployeeResponse updateEmployee(@WebParam(partName = "parameters", name = "updateEmployeeRequest", targetNamespace = "http://metadata.company.epam.com/") UpdateEmployeeRequest parameters) {
-        EmployeeDTO employeeDTO = parameters.getReturn();
+        EmployeeDTO employeeDTO = parameters.getEmployeeDTO();
         Employee employee = new Employee();
         mapper.map(employeeDTO, employee);
         employeeService.updateEmployee(employee);

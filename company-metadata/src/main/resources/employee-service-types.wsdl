@@ -8,24 +8,24 @@
             <xs:element name="createEmployeeResponse" type="tns:createEmployeeResponse"/>
             <xs:complexType name="createEmployeeRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="tns:EmployeeDTO"/>
+                    <xs:element minOccurs="0" name="employeeDTO" type="tns:EmployeeDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="createEmployeeResponse">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="return" type="xs:long"/>
+                    <xs:element minOccurs="0" name="employeeId" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="getEmployeeByIdRequest" type="tns:getEmployeeByIdRequest"/>
             <xs:element name="getEmployeeByIdResponse" type="tns:getEmployeeByIdResponse"/>
             <xs:complexType name="getEmployeeByIdRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+                    <xs:element minOccurs="0" name="employeeId" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="getEmployeeByIdResponse">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="tns:EmployeeDTO"/>
+                    <xs:element minOccurs="0" name="employeeDTO" type="tns:EmployeeDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="getAllEmployeesRequest" type="tns:getAllEmployeesRequest"/>
@@ -34,14 +34,14 @@
             </xs:complexType>
             <xs:complexType name="getAllEmployeesResponse">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="return" maxOccurs="unbounded" type="tns:EmployeeDTO"/>
+                    <xs:element minOccurs="0" name="employeeDTOList" maxOccurs="unbounded" type="tns:EmployeeDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="updateEmployeeRequest" type="tns:updateEmployeeRequest"/>
             <xs:element name="updateEmployeeResponse" type="tns:updateEmployeeResponse"/>
             <xs:complexType name="updateEmployeeRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="return" type="tns:EmployeeDTO"/>
+                    <xs:element minOccurs="0" name="employeeDTO" type="tns:EmployeeDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="updateEmployeeResponse">
@@ -50,12 +50,12 @@
             <xs:element name="getEmployeesByCompanyIdResponse" type="tns:getEmployeesByCompanyIdResponse"/>
             <xs:complexType name="getEmployeesByCompanyIdRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+                    <xs:element minOccurs="0" name="companyId" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="getEmployeesByCompanyIdResponse">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" name="arg0" type="tns:EmployeeDTO"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="employeeDTOList" type="tns:EmployeeDTO"/>
                 </xs:sequence>
             </xs:complexType>
         </xs:schema>

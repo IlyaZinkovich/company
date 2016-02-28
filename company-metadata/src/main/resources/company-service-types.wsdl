@@ -8,24 +8,24 @@
             <xs:element name="createCompanyResponse" type="tns:createCompanyResponse"/>
             <xs:complexType name="createCompanyRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="tns:CompanyDTO"/>
+                    <xs:element minOccurs="0" name="companyDTO" type="tns:CompanyDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="createCompanyResponse">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="return" type="xs:long"/>
+                    <xs:element minOccurs="0" name="companyId" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="getCompanyByIdRequest" type="tns:getCompanyByIdRequest"/>
             <xs:element name="getCompanyByIdResponse" type="tns:getCompanyByIdResponse"/>
             <xs:complexType name="getCompanyByIdRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+                    <xs:element minOccurs="0" name="companyId" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="getCompanyByIdResponse">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="tns:CompanyDTO"/>
+                    <xs:element minOccurs="0" name="companyDTO" type="tns:CompanyDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="getAllCompaniesRequest" type="tns:getAllCompaniesRequest"/>
@@ -34,14 +34,14 @@
             </xs:complexType>
             <xs:complexType name="getAllCompaniesResponse">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:CompanyDTO"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="companyDTOList" type="tns:CompanyDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="updateCompanyRequest" type="tns:updateCompanyRequest"/>
             <xs:element name="updateCompanyResponse" type="tns:updateCompanyResponse"/>
             <xs:complexType name="updateCompanyRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="return" type="tns:CompanyDTO"/>
+                    <xs:element minOccurs="0" name="companyDTO" type="tns:CompanyDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="updateCompanyResponse">

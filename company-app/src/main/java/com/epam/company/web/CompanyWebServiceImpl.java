@@ -27,7 +27,7 @@ public class CompanyWebServiceImpl implements CompanyWebService {
 
     @Override
     public UpdateCompanyResponse updateCompany(@WebParam(partName = "parameters", name = "updateCompanyRequest", targetNamespace = "http://metadata.company.epam.com/") UpdateCompanyRequest parameters) {
-        CompanyDTO companyDTO = parameters.getReturn();
+        CompanyDTO companyDTO = parameters.getCompanyDTO();
         Company company = new Company();
         mapper.map(companyDTO, company);
         companyService.updateCompany(company);
@@ -36,12 +36,12 @@ public class CompanyWebServiceImpl implements CompanyWebService {
 
     @Override
     public GetCompanyByIdResponse getCompanyById(@WebParam(partName = "parameters", name = "getCompanyByIdRequest", targetNamespace = "http://metadata.company.epam.com/") GetCompanyByIdRequest parameters) {
-        Long companyId = parameters.getArg0();
+        Long companyId = parameters.getCompanyId();
         Company company = companyService.getCompanyById(companyId);
         CompanyDTO companyDTO = new CompanyDTO();
         mapper.map(company, companyDTO);
         GetCompanyByIdResponse getCompanyByIdResponse = new GetCompanyByIdResponse();
-        getCompanyByIdResponse.setArg0(companyDTO);
+        getCompanyByIdResponse.setCompanyDTO(companyDTO);
         return getCompanyByIdResponse;
     }
 
@@ -55,18 +55,18 @@ public class CompanyWebServiceImpl implements CompanyWebService {
             companyDTOs.add(companyDTO);
         });
         GetAllCompaniesResponse getAllCompaniesResponse = new GetAllCompaniesResponse();
-        companyDTOs.forEach(c -> getAllCompaniesResponse.getReturn().add(c));
+        companyDTOs.forEach(c -> getAllCompaniesResponse.getCompanyDTOList().add(c));
         return getAllCompaniesResponse;
     }
 
     @Override
     public CreateCompanyResponse createCompany(@WebParam(partName = "parameters", name = "createCompanyRequest", targetNamespace = "http://metadata.company.epam.com/") CreateCompanyRequest parameters) {
-        CompanyDTO companyDTO = parameters.getArg0();
+        CompanyDTO companyDTO = parameters.getCompanyDTO();
         Company company = new Company();
         mapper.map(companyDTO, company);
         Long companyId = companyService.createCompany(company);
         CreateCompanyResponse createCompanyResponse = new CreateCompanyResponse();
-        createCompanyResponse.setReturn(companyId);
+        createCompanyResponse.setCompanyId(companyId);
         return createCompanyResponse;
     }
 }
