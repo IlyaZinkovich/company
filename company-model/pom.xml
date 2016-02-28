@@ -11,11 +11,29 @@
 
     <artifactId>company-model</artifactId>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>schemagen</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>${jpa.version}</version>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>${hibernate.jpa.version}</version>
         </dependency>
     </dependencies>
 

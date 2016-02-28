@@ -1,10 +1,10 @@
 package com.epam.company.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @XmlRootElement(name = "Company")
@@ -14,7 +14,7 @@ public class Company implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long corporateId;
+    private Long companyId;
     private String name;
     private Long employeeCount;
     private String address;
@@ -25,15 +25,21 @@ public class Company implements Serializable {
     private String stateCode;
     private String postalCode;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(joinColumns = @JoinColumn(referencedColumnName = "companyId", name = "companyId"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "employeeId", name = "employeeId"))
+    private List<Employee> employees;
+
     public Company() {
+        this.employees = new ArrayList<Employee>();
     }
 
-    public Long getCorporateId() {
-        return corporateId;
+    public Long getCompanyId() {
+        return companyId;
     }
 
-    public void setCorporateId(Long corporateId) {
-        this.corporateId = corporateId;
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public String getName() {
@@ -108,6 +114,14 @@ public class Company implements Serializable {
         this.postalCode = postalCode;
     }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -115,7 +129,7 @@ public class Company implements Serializable {
 
         Company company = (Company) o;
 
-        if (getCorporateId() != null ? !getCorporateId().equals(company.getCorporateId()) : company.getCorporateId() != null)
+        if (getCompanyId() != null ? !getCompanyId().equals(company.getCompanyId()) : company.getCompanyId() != null)
             return false;
         if (getName() != null ? !getName().equals(company.getName()) : company.getName() != null) return false;
         if (getEmployeeCount() != null ? !getEmployeeCount().equals(company.getEmployeeCount()) : company.getEmployeeCount() != null)
@@ -138,7 +152,7 @@ public class Company implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = getCorporateId() != null ? getCorporateId().hashCode() : 0;
+        int result = getCompanyId() != null ? getCompanyId().hashCode() : 0;
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getEmployeeCount() != null ? getEmployeeCount().hashCode() : 0);
         result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
@@ -154,7 +168,7 @@ public class Company implements Serializable {
     @Override
     public String toString() {
         return "Company{" +
-                "corporateId=" + corporateId +
+                "companyId=" + companyId +
                 ", name='" + name + '\'' +
                 ", employeeCount=" + employeeCount +
                 ", address='" + address + '\'' +
