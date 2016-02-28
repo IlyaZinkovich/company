@@ -2,7 +2,9 @@ package com.epam.company;
 
 import com.epam.company.filter.SupportCORSFilter;
 import com.epam.company.rest.CompanyRestService;
+import com.epam.company.rest.EmployeeResource;
 import com.epam.company.web.CompanyWebServiceImplService;
+import com.epam.company.web.EmployeeWebServiceImplService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -42,7 +44,7 @@ public class RestAppConfig
     {
         JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(new Application(),
                 JAXRSServerFactoryBean.class);
-        factory.setServiceBeans(Arrays.asList(companyService()));
+        factory.setServiceBeans(Arrays.asList(companyService(), employeeResource()));
         factory.setProviders(Arrays.asList(jsonProvider(), supportCORSFilter()));
         factory.setFeatures(asList(beanValidationFeature()));
         return factory;
@@ -74,14 +76,25 @@ public class RestAppConfig
     }
 
     @Bean
-    public CompanyWebServiceImplService client() {
+    public CompanyWebServiceImplService companyClient() {
         return new CompanyWebServiceImplService();
+    }
+
+    @Bean
+    public EmployeeWebServiceImplService employeeClient() {
+        return new EmployeeWebServiceImplService();
     }
 
     @Bean
     public CompanyRestService companyService()
     {
         return new CompanyRestService();
+    }
+
+    @Bean
+    public EmployeeResource employeeResource()
+    {
+        return new EmployeeResource();
     }
 
     @Bean

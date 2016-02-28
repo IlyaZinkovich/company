@@ -28,14 +28,14 @@ public class AppConfig {
     @Bean
     public Endpoint companyWebService() {
         EndpointImpl endpoint = new EndpointImpl(bus, companyWebService);
-        endpoint.publish("/company");
+        endpoint.publish("/CompanyWebService");
         return endpoint;
     }
 
     @Bean
     public Endpoint employeeWebService() {
         EndpointImpl endpoint = new EndpointImpl(bus, employeeWebService);
-        endpoint.publish("/employee");
+        endpoint.publish("/EmployeeWebService");
         return endpoint;
     }
 
