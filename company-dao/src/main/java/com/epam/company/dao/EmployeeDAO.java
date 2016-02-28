@@ -1,6 +1,5 @@
 package com.epam.company.dao;
 
-import com.epam.company.model.Company;
 import com.epam.company.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
