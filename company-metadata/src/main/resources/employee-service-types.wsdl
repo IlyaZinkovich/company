@@ -25,7 +25,7 @@
             </xs:complexType>
             <xs:complexType name="getEmployeeByIdResponse">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="tns:CompanyDTO"/>
+                    <xs:element minOccurs="0" name="arg0" type="tns:EmployeeDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="getAllEmployeesRequest" type="tns:getAllEmployeesRequest"/>
@@ -50,10 +50,13 @@
             <xs:element name="getEmployeesByCompanyIdResponse" type="tns:getEmployeesByCompanyIdResponse"/>
             <xs:complexType name="getEmployeesByCompanyIdRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="return" type="tns:EmployeeDTO"/>
+                    <xs:element minOccurs="0" name="arg0" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="getEmployeesByCompanyIdResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="arg0" type="tns:EmployeeDTO"/>
+                </xs:sequence>
             </xs:complexType>
         </xs:schema>
     </wsdl:types>
@@ -85,7 +88,7 @@
         <wsdl:part element="ns1:getEmployeesByCompanyIdRequest" name="parameters"/>
     </wsdl:message>
     <wsdl:message name="getEmployeesByCompanyIdResponse">
-        <wsdl:part element="ns1:getEmployeesByCompanyIdRequest" name="parameters"/>
+        <wsdl:part element="ns1:getEmployeesByCompanyIdResponse" name="parameters"/>
     </wsdl:message>
     <wsdl:portType name="EmployeeWebService">
         <wsdl:operation name="createEmployee">

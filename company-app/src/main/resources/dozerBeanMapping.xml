@@ -19,4 +19,9 @@
         </field-exclude>
     </mapping>
 
+    <mapping>
+        <class-a>com.epam.company.metadata.EmployeeDTO</class-a>
+        <class-b>com.epam.company.model.Employee</class-b>
+    </mapping>
+
 </mappings>
