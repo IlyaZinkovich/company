@@ -1,0 +1,93 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://metadata.company.epam.com/" name="CompanyWebService" targetNamespace="http://metadata.company.epam.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://metadata.company.epam.com/"
+                   elementFormDefault="unqualified" targetNamespace="http://metadata.company.epam.com/" version="1.0">
+            <xs:include schemaLocation="model-types.xsd"/>
+            <xs:element name="CompanyDTO" type="tns:CompanyDTO"/>
+            <xs:element name="createCompanyRequest" type="tns:createCompanyRequest"/>
+            <xs:element name="createCompanyResponse" type="tns:createCompanyResponse"/>
+            <xs:complexType name="createCompanyRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:CompanyDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="createCompanyResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="getCompanyByIdRequest" type="tns:getCompanyByIdRequest"/>
+            <xs:element name="getCompanyByIdResponse" type="tns:getCompanyByIdResponse"/>
+            <xs:complexType name="getCompanyByIdRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getCompanyByIdResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:CompanyDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="getAllCompaniesRequest" type="tns:getAllCompaniesRequest"/>
+            <xs:element name="getAllCompaniesResponse" type="tns:getAllCompaniesResponse"/>
+            <xs:complexType name="getAllCompaniesRequest">
+            </xs:complexType>
+            <xs:complexType name="getAllCompaniesResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:CompanyDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="updateCompanyRequest" type="tns:updateCompanyRequest"/>
+            <xs:element name="updateCompanyResponse" type="tns:updateCompanyResponse"/>
+            <xs:complexType name="updateCompanyRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:CompanyDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="updateCompanyResponse">
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="createCompanyRequest">
+        <wsdl:part element="ns1:createCompanyRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="createCompanyResponse">
+        <wsdl:part element="ns1:createCompanyResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getCompanyByIdRequest">
+        <wsdl:part element="ns1:getCompanyByIdRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getCompanyByIdResponse">
+        <wsdl:part element="ns1:getCompanyByIdResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getAllCompaniesRequest">
+        <wsdl:part element="ns1:getAllCompaniesRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getAllCompaniesResponse">
+        <wsdl:part element="ns1:getAllCompaniesResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateCompanyRequest">
+        <wsdl:part element="ns1:updateCompanyRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateCompanyResponse">
+        <wsdl:part element="ns1:updateCompanyResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="CompanyWebService">
+        <wsdl:operation name="createCompany">
+            <wsdl:input message="ns1:createCompanyRequest" name="createCompanyRequest"/>
+            <wsdl:output message="ns1:createCompanyResponse" name="createCompanyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getCompanyById">
+            <wsdl:input message="ns1:getCompanyByIdRequest" name="getCompanyByIdRequest"/>
+            <wsdl:output message="ns1:getCompanyByIdResponse" name="getCompanyByIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllCompanies">
+            <wsdl:input message="ns1:getAllCompaniesRequest" name="getAllCompaniesRequest"/>
+            <wsdl:output message="ns1:getAllCompaniesResponse" name="getAllCompaniesResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateCompany">
+            <wsdl:input message="ns1:updateCompanyRequest" name="updateCompanyRequest"/>
+            <wsdl:output message="ns1:updateCompanyResponse" name="updateCompanyResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

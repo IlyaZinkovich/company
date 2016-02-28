@@ -95,7 +95,7 @@
         </dependency>
         <dependency>
             <groupId>com.epam</groupId>
-            <artifactId>company-api</artifactId>
+            <artifactId>company-metadata</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

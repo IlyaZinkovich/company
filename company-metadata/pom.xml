@@ -25,10 +25,14 @@
                         <configuration>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>${basedir}/src/main/resources/company.wsdl</wsdl>
-                                    <extraargs>
-                                        <extraarg>-client</extraarg>
-                                    </extraargs>
+                                    <wsdl>
+                                        ${basedir}/src/main/resources/company-service.wsdl
+                                    </wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>
+                                        ${basedir}/src/main/resources/employee-service.wsdl
+                                    </wsdl>
                                 </wsdlOption>
                             </wsdlOptions>
                         </configuration>

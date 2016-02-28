@@ -1,0 +1,47 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://web.company.epam.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://metadata.company.epam.com/" name="CompanyWebServiceImplService" targetNamespace="http://web.company.epam.com/">
+    <wsdl:import location="company-service-types.wsdl" namespace="http://metadata.company.epam.com/"/>
+    <wsdl:binding name="CompanyWebServiceImplServiceSoapBinding" type="ns1:CompanyWebService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="createCompany">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="createCompanyRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createCompanyResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCompanyById">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getCompanyByIdRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getCompanyByIdResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllCompanies">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getAllCompaniesRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getAllCompaniesResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateCompany">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="updateCompanyRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="updateCompanyResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CompanyWebServiceImplService">
+        <wsdl:port binding="tns:CompanyWebServiceImplServiceSoapBinding" name="CompanyWebServiceImplPort">
+            <soap:address location="http://localhost:8080/CompanyWebService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

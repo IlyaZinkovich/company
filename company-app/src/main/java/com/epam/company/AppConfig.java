@@ -1,10 +1,9 @@
 package com.epam.company;
 
-import com.epam.company.api.CompanyWebService;
-import com.epam.company.web.CompanyWebServiceImpl;
+import com.epam.company.metadata.CompanyWebService;
+import com.epam.company.metadata.EmployeeWebService;
 import org.apache.cxf.Bus;
 import org.apache.cxf.jaxws.EndpointImpl;
-import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,10 +22,19 @@ public class AppConfig {
     private Bus bus;
     @Autowired
     private CompanyWebService companyWebService;
+    @Autowired
+    private EmployeeWebService employeeWebService;
 
     @Bean
     public Endpoint companyWebService() {
         EndpointImpl endpoint = new EndpointImpl(bus, companyWebService);
+        endpoint.publish("/");
+        return endpoint;
+    }
+
+    @Bean
+    public Endpoint employeeWebService() {
+        EndpointImpl endpoint = new EndpointImpl(bus, employeeWebService);
         endpoint.publish("/");
         return endpoint;
     }
