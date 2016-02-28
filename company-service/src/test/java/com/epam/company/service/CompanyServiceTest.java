@@ -6,12 +6,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
+@Transactional
 public class CompanyServiceTest {
 
     @Autowired
@@ -23,7 +25,7 @@ public class CompanyServiceTest {
         company.setName("company");
         Long id = companyService.createCompany(company);
         assertNotNull(id);
-        company.setCorporateId(id);
+        company.setCompanyId(id);
         Company persistedCompany = companyService.getCompanyById(id);
         assertEquals(company, persistedCompany);
     }
