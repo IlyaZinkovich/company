@@ -16,7 +16,6 @@ public class Company implements Serializable {
     @GeneratedValue
     private Long companyId;
     private String name;
-    private Long employeeCount;
     private String address;
     private String countryCode;
     private String addressLine1;
@@ -48,14 +47,6 @@ public class Company implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getEmployeeCount() {
-        return employeeCount;
-    }
-
-    public void setEmployeeCount(Long employeeCount) {
-        this.employeeCount = employeeCount;
     }
 
     public String getAddress() {
@@ -132,8 +123,6 @@ public class Company implements Serializable {
         if (getCompanyId() != null ? !getCompanyId().equals(company.getCompanyId()) : company.getCompanyId() != null)
             return false;
         if (getName() != null ? !getName().equals(company.getName()) : company.getName() != null) return false;
-        if (getEmployeeCount() != null ? !getEmployeeCount().equals(company.getEmployeeCount()) : company.getEmployeeCount() != null)
-            return false;
         if (getAddress() != null ? !getAddress().equals(company.getAddress()) : company.getAddress() != null)
             return false;
         if (getCountryCode() != null ? !getCountryCode().equals(company.getCountryCode()) : company.getCountryCode() != null)
@@ -154,7 +143,6 @@ public class Company implements Serializable {
     public int hashCode() {
         int result = getCompanyId() != null ? getCompanyId().hashCode() : 0;
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getEmployeeCount() != null ? getEmployeeCount().hashCode() : 0);
         result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
         result = 31 * result + (getCountryCode() != null ? getCountryCode().hashCode() : 0);
         result = 31 * result + (getAddressLine1() != null ? getAddressLine1().hashCode() : 0);
@@ -170,7 +158,6 @@ public class Company implements Serializable {
         return "Company{" +
                 "companyId=" + companyId +
                 ", name='" + name + '\'' +
-                ", employeeCount=" + employeeCount +
                 ", address='" + address + '\'' +
                 ", countryCode='" + countryCode + '\'' +
                 ", addressLine1='" + addressLine1 + '\'' +

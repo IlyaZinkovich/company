@@ -1,9 +1,6 @@
 package com.epam.company.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
@@ -22,7 +19,7 @@ public class Employee implements Serializable {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
-    @ManyToMany(mappedBy="employees")
+    @ManyToMany(mappedBy="employees", fetch = FetchType.EAGER)
     private List<Company> companies;
 
     public Long getEmployeeId() {

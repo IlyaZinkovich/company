@@ -34,7 +34,7 @@
             </xs:complexType>
             <xs:complexType name="getAllCompaniesResponse">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="return" type="tns:CompanyDTO"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:CompanyDTO"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="updateCompanyRequest" type="tns:updateCompanyRequest"/>

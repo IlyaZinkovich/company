@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" >
     <xs:complexType name="CompanyDTO">
         <xs:sequence>
             <xs:element minOccurs="0" name="address" type="xs:string"/>
@@ -8,7 +8,6 @@
             <xs:element minOccurs="0" name="cityName" type="xs:string"/>
             <xs:element minOccurs="0" name="companyId" type="xs:long"/>
             <xs:element minOccurs="0" name="countryCode" type="xs:string"/>
-            <xs:element minOccurs="0" name="employeeCount" type="xs:long"/>
             <xs:element minOccurs="0" name="name" type="xs:string"/>
             <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
             <xs:element minOccurs="0" name="stateCode" type="xs:string"/>
@@ -21,7 +20,13 @@
             <xs:element minOccurs="0" name="employeeId" type="xs:long"/>
             <xs:element minOccurs="0" name="firstName" type="xs:string"/>
             <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="employees" maxOccurs="unbounded" type="CompanyDTO"/>
+            </xs:sequence>
         </xs:sequence>
+    </xs:complexType>
+    <xs:complexType abstract="true" name="xmlAdapter">
+        <xs:sequence/>
     </xs:complexType>
     <xs:complexType name="localDateAdapter">
         <xs:complexContent>
@@ -29,8 +34,5 @@
                 <xs:sequence/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType abstract="true" name="xmlAdapter">
-        <xs:sequence/>
     </xs:complexType>
 </xs:schema>
