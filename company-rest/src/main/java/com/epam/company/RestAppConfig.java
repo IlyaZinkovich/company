@@ -1,10 +1,10 @@
 package com.epam.company;
 
 import com.epam.company.filter.SupportCORSFilter;
-import com.epam.company.rest.CompanyRestService;
+import com.epam.company.rest.DepartmentRestService;
 import com.epam.company.rest.EmployeeResource;
-import com.epam.company.web.CompanyWebServiceImplService;
-import com.epam.company.web.EmployeeWebServiceImplService;
+import com.epam.company.web.DepartmentServiceClient;
+import com.epam.company.web.EmployeeServiceClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -76,19 +76,19 @@ public class RestAppConfig
     }
 
     @Bean
-    public CompanyWebServiceImplService companyClient() {
-        return new CompanyWebServiceImplService();
+    public DepartmentServiceClient departmentClient() {
+        return new DepartmentServiceClient();
     }
 
     @Bean
-    public EmployeeWebServiceImplService employeeClient() {
-        return new EmployeeWebServiceImplService();
+    public EmployeeServiceClient employeeClient() {
+        return new EmployeeServiceClient();
     }
 
     @Bean
-    public CompanyRestService companyService()
+    public DepartmentRestService companyService()
     {
-        return new CompanyRestService();
+        return new DepartmentRestService();
     }
 
     @Bean

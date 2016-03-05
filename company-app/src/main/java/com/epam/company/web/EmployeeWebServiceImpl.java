@@ -35,19 +35,6 @@ public class EmployeeWebServiceImpl implements EmployeeWebService {
     }
 
     @Override
-    public GetEmployeesByCompanyIdResponse getEmployeesByCompanyId(@WebParam(partName = "parameters", name = "getEmployeesByCompanyIdRequest", targetNamespace = "http://metadata.company.epam.com/") GetEmployeesByCompanyIdRequest parameters) {
-        Long companyId = parameters.getCompanyId();
-        List<Employee> employees = employeeService.getEmployeesByCompanyId(companyId);
-        GetEmployeesByCompanyIdResponse response = new GetEmployeesByCompanyIdResponse();
-        employees.forEach(employee -> {
-            EmployeeDTO employeeDTO = new EmployeeDTO();
-            mapper.map(employee, employeeDTO);
-            response.getEmployeeDTOList().add(employeeDTO);
-        });
-        return response;
-    }
-
-    @Override
     public CreateEmployeeResponse createEmployee(@WebParam(partName = "parameters", name = "createEmployeeRequest", targetNamespace = "http://metadata.company.epam.com/") CreateEmployeeRequest parameters) {
         EmployeeDTO employeeDTO = parameters.getEmployeeDTO();
         Employee employee = new Employee();
@@ -77,6 +64,19 @@ public class EmployeeWebServiceImpl implements EmployeeWebService {
         mapper.map(employeeDTO, employee);
         employeeService.updateEmployee(employee);
         return new UpdateEmployeeResponse();
+    }
+
+    @Override
+    public GetEmployeesByDepartmentIdResponse getEmployeesByDepartmentId(@WebParam(partName = "parameters", name = "getEmployeesByDepartmentIdRequest", targetNamespace = "http://metadata.company.epam.com/") GetEmployeesByDepartmentIdRequest parameters) {
+        Long departmentId = parameters.getDepartmentId();
+        List<Employee> employees = employeeService.getEmployeesByDepartmentId(departmentId);
+        GetEmployeesByDepartmentIdResponse response = new GetEmployeesByDepartmentIdResponse();
+        employees.forEach(employee -> {
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            mapper.map(employee, employeeDTO);
+            response.getEmployeeDTOList().add(employeeDTO);
+        });
+        return response;
     }
 
 }

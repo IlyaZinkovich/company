@@ -1,0 +1,47 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://web.company.epam.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://metadata.company.epam.com/" name="DepartmentServiceClient" targetNamespace="http://web.company.epam.com/">
+    <wsdl:import location="department-service-types.wsdl" namespace="http://metadata.company.epam.com/"/>
+    <wsdl:binding name="DepartmentServiceClientSoapBinding" type="ns1:DepartmentWebService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="createDepartment">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="createDepartmentRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createDepartmentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getDepartmentById">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getDepartmentByIdRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getDepartmentByIdResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllDepartments">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getAllDepartmentsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getAllDepartmentsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateDepartment">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="updateDepartmentRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="updateDepartmentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="DepartmentServiceClient">
+        <wsdl:port binding="tns:DepartmentServiceClientSoapBinding" name="DepartmentWebServiceImplPort">
+            <soap:address location="http://localhost:8080/DepartmentWebService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

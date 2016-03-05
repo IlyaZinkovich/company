@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface EmployeeDAO extends JpaRepository<Employee, Long> {
 
-    @Query("SELECT e FROM Employee e JOIN e.companies c WHERE c.id=:companyId")
-    List<Employee> findByCompaniesCompanyId(@Param("companyId") Long companyId);
+    @Query("SELECT e FROM Employee e JOIN e.department d WHERE d.id=:departmentId")
+    List<Employee> findByDepartmentDepartmentId(@Param("departmentId") Long departmentId);
 
 }

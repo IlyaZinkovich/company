@@ -46,14 +46,14 @@
             </xs:complexType>
             <xs:complexType name="updateEmployeeResponse">
             </xs:complexType>
-            <xs:element name="getEmployeesByCompanyIdRequest" type="tns:getEmployeesByCompanyIdRequest"/>
-            <xs:element name="getEmployeesByCompanyIdResponse" type="tns:getEmployeesByCompanyIdResponse"/>
-            <xs:complexType name="getEmployeesByCompanyIdRequest">
+            <xs:element name="getEmployeesByDepartmentIdRequest" type="tns:getEmployeesByDepartmentIdRequest"/>
+            <xs:element name="getEmployeesByDepartmentIdResponse" type="tns:getEmployeesByDepartmentIdResponse"/>
+            <xs:complexType name="getEmployeesByDepartmentIdRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="companyId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="departmentId" type="xs:long"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:complexType name="getEmployeesByCompanyIdResponse">
+            <xs:complexType name="getEmployeesByDepartmentIdResponse">
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="employeeDTOList" type="tns:EmployeeDTO"/>
                 </xs:sequence>
@@ -84,11 +84,11 @@
     <wsdl:message name="updateEmployeeResponse">
         <wsdl:part element="ns1:updateEmployeeResponse" name="parameters"/>
     </wsdl:message>
-    <wsdl:message name="getEmployeesByCompanyIdRequest">
-        <wsdl:part element="ns1:getEmployeesByCompanyIdRequest" name="parameters"/>
+    <wsdl:message name="getEmployeesByDepartmentIdRequest">
+        <wsdl:part element="ns1:getEmployeesByDepartmentIdRequest" name="parameters"/>
     </wsdl:message>
-    <wsdl:message name="getEmployeesByCompanyIdResponse">
-        <wsdl:part element="ns1:getEmployeesByCompanyIdResponse" name="parameters"/>
+    <wsdl:message name="getEmployeesByDepartmentIdResponse">
+        <wsdl:part element="ns1:getEmployeesByDepartmentIdResponse" name="parameters"/>
     </wsdl:message>
     <wsdl:portType name="EmployeeWebService">
         <wsdl:operation name="createEmployee">
@@ -107,9 +107,9 @@
             <wsdl:input message="ns1:updateEmployeeRequest" name="updateEmployeeRequest"/>
             <wsdl:output message="ns1:updateEmployeeResponse" name="updateEmployeeResponse"/>
         </wsdl:operation>
-        <wsdl:operation name="getEmployeesByCompanyId">
-            <wsdl:input message="ns1:getEmployeesByCompanyIdRequest" name="getEmployeesByCompanyIdRequest"/>
-            <wsdl:output message="ns1:getEmployeesByCompanyIdResponse" name="getEmployeesByCompanyIdResponse"/>
+        <wsdl:operation name="getEmployeesByDepartmentId">
+            <wsdl:input message="ns1:getEmployeesByDepartmentIdRequest" name="getEmployeesByDepartmentIdRequest"/>
+            <wsdl:output message="ns1:getEmployeesByDepartmentIdResponse" name="getEmployeesByDepartmentIdResponse"/>
         </wsdl:operation>
     </wsdl:portType>
 </wsdl:definitions>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" >
-    <xs:complexType name="CompanyDTO">
+    <xs:complexType name="DepartmentDTO">
         <xs:sequence>
             <xs:element minOccurs="0" name="address" type="xs:string"/>
             <xs:element minOccurs="0" name="addressLine1" type="xs:string"/>
             <xs:element minOccurs="0" name="addressLine2" type="xs:string"/>
             <xs:element minOccurs="0" name="cityName" type="xs:string"/>
-            <xs:element minOccurs="0" name="companyId" type="xs:long"/>
+            <xs:element minOccurs="0" name="departmentId" type="xs:long"/>
             <xs:element minOccurs="0" name="countryCode" type="xs:string"/>
             <xs:element minOccurs="0" name="name" type="xs:string"/>
             <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
@@ -16,12 +16,12 @@
     <xs:complexType name="EmployeeDTO">
         <xs:sequence>
             <xs:element minOccurs="0" name="birthDate" type="xs:string"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" name="companies" nillable="true" type="CompanyDTO"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="departments" nillable="true" type="DepartmentDTO"/>
             <xs:element minOccurs="0" name="employeeId" type="xs:long"/>
             <xs:element minOccurs="0" name="firstName" type="xs:string"/>
             <xs:element minOccurs="0" name="lastName" type="xs:string"/>
             <xs:sequence>
-                <xs:element minOccurs="0" name="employees" maxOccurs="unbounded" type="CompanyDTO"/>
+                <xs:element minOccurs="0" name="employees" maxOccurs="unbounded" type="DepartmentDTO"/>
             </xs:sequence>
         </xs:sequence>
     </xs:complexType>

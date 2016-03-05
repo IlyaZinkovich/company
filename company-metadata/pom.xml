@@ -26,7 +26,7 @@
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>
-                                        ${basedir}/src/main/resources/company-service.wsdl
+                                        ${basedir}/src/main/resources/department-service.wsdl
                                     </wsdl>
                                 </wsdlOption>
                                 <wsdlOption>
