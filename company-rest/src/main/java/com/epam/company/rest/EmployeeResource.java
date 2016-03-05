@@ -1,7 +1,7 @@
 package com.epam.company.rest;
 
 import com.epam.company.metadata.*;
-import com.epam.company.web.EmployeeWebServiceImplService;
+import com.epam.company.web.EmployeeServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
@@ -12,7 +12,7 @@ import java.util.List;
 public class EmployeeResource {
 
     @Autowired
-    private EmployeeWebServiceImplService client;
+    private EmployeeServiceClient client;
 
     @GET
     public List<EmployeeDTO> getAllEmployees() {
@@ -22,10 +22,10 @@ public class EmployeeResource {
     }
 
     @GET
-    public List<EmployeeDTO> getEmployeesByCompanyId(@PathParam("companyId") Long companyId) {
-        GetEmployeesByCompanyIdRequest request = new GetEmployeesByCompanyIdRequest();
-        request.setCompanyId(companyId);
-        GetEmployeesByCompanyIdResponse response = client.getEmployeeWebServiceImplPort().getEmployeesByCompanyId(request);
+    public List<EmployeeDTO> getEmployeesByDepartmentId(@PathParam("companyId") Long departmentId) {
+        GetEmployeesByDepartmentIdRequest request = new GetEmployeesByDepartmentIdRequest();
+        request.setDepartmentId(departmentId);
+        GetEmployeesByDepartmentIdResponse response = client.getEmployeeWebServiceImplPort().getEmployeesByDepartmentId(request);
         return response.getEmployeeDTOList();
     }
 

@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@XmlRootElement(name = "Company")
-public class Company implements Serializable {
+@XmlRootElement(name = "Department")
+public class Department implements Serializable {
 
     private static final long serialVersionUID = -927006435553226472L;
 
     @Id
     @GeneratedValue
-    private Long companyId;
+    private Long departmentId;
     private String name;
     private String address;
     private String countryCode;
@@ -25,20 +25,20 @@ public class Company implements Serializable {
     private String postalCode;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(joinColumns = @JoinColumn(referencedColumnName = "companyId", name = "companyId"),
+    @JoinTable(joinColumns = @JoinColumn(referencedColumnName = "departmentId", name = "departmentId"),
             inverseJoinColumns = @JoinColumn(referencedColumnName = "employeeId", name = "employeeId"))
     private List<Employee> employees;
 
-    public Company() {
+    public Department() {
         this.employees = new ArrayList<Employee>();
     }
 
-    public Long getCompanyId() {
-        return companyId;
+    public Long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getName() {
@@ -116,32 +116,32 @@ public class Company implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Company)) return false;
+        if (!(o instanceof Department)) return false;
 
-        Company company = (Company) o;
+        Department department = (Department) o;
 
-        if (getCompanyId() != null ? !getCompanyId().equals(company.getCompanyId()) : company.getCompanyId() != null)
+        if (getDepartmentId() != null ? !getDepartmentId().equals(department.getDepartmentId()) : department.getDepartmentId() != null)
             return false;
-        if (getName() != null ? !getName().equals(company.getName()) : company.getName() != null) return false;
-        if (getAddress() != null ? !getAddress().equals(company.getAddress()) : company.getAddress() != null)
+        if (getName() != null ? !getName().equals(department.getName()) : department.getName() != null) return false;
+        if (getAddress() != null ? !getAddress().equals(department.getAddress()) : department.getAddress() != null)
             return false;
-        if (getCountryCode() != null ? !getCountryCode().equals(company.getCountryCode()) : company.getCountryCode() != null)
+        if (getCountryCode() != null ? !getCountryCode().equals(department.getCountryCode()) : department.getCountryCode() != null)
             return false;
-        if (getAddressLine1() != null ? !getAddressLine1().equals(company.getAddressLine1()) : company.getAddressLine1() != null)
+        if (getAddressLine1() != null ? !getAddressLine1().equals(department.getAddressLine1()) : department.getAddressLine1() != null)
             return false;
-        if (getAddressLine2() != null ? !getAddressLine2().equals(company.getAddressLine2()) : company.getAddressLine2() != null)
+        if (getAddressLine2() != null ? !getAddressLine2().equals(department.getAddressLine2()) : department.getAddressLine2() != null)
             return false;
-        if (getCityName() != null ? !getCityName().equals(company.getCityName()) : company.getCityName() != null)
+        if (getCityName() != null ? !getCityName().equals(department.getCityName()) : department.getCityName() != null)
             return false;
-        if (getStateCode() != null ? !getStateCode().equals(company.getStateCode()) : company.getStateCode() != null)
+        if (getStateCode() != null ? !getStateCode().equals(department.getStateCode()) : department.getStateCode() != null)
             return false;
-        return !(getPostalCode() != null ? !getPostalCode().equals(company.getPostalCode()) : company.getPostalCode() != null);
+        return !(getPostalCode() != null ? !getPostalCode().equals(department.getPostalCode()) : department.getPostalCode() != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = getCompanyId() != null ? getCompanyId().hashCode() : 0;
+        int result = getDepartmentId() != null ? getDepartmentId().hashCode() : 0;
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
         result = 31 * result + (getCountryCode() != null ? getCountryCode().hashCode() : 0);
@@ -155,8 +155,8 @@ public class Company implements Serializable {
 
     @Override
     public String toString() {
-        return "Company{" +
-                "companyId=" + companyId +
+        return "Department{" +
+                "departmentId=" + departmentId +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", countryCode='" + countryCode + '\'' +

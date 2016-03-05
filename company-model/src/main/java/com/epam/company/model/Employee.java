@@ -19,8 +19,10 @@ public class Employee implements Serializable {
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
-    @ManyToMany(mappedBy="employees", fetch = FetchType.EAGER)
-    private List<Company> companies;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Department department;
+    @OneToMany(mappedBy = "employee")
+    private List<ProjectPosition> projectPositions;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -55,12 +57,12 @@ public class Employee implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public List<Company> getCompanies() {
-        return companies;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @Override
@@ -77,7 +79,7 @@ public class Employee implements Serializable {
             return false;
         if (getBirthDate() != null ? !getBirthDate().equals(employee.getBirthDate()) : employee.getBirthDate() != null)
             return false;
-        return !(getCompanies() != null ? !getCompanies().equals(employee.getCompanies()) : employee.getCompanies() != null);
+        return !(getDepartment() != null ? !getDepartment().equals(employee.getDepartment()) : employee.getDepartment() != null);
 
     }
 
@@ -87,7 +89,7 @@ public class Employee implements Serializable {
         result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
         result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
         result = 31 * result + (getBirthDate() != null ? getBirthDate().hashCode() : 0);
-        result = 31 * result + (getCompanies() != null ? getCompanies().hashCode() : 0);
+        result = 31 * result + (getDepartment() != null ? getDepartment().hashCode() : 0);
         return result;
     }
 }

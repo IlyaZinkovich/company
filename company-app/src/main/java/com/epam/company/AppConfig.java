@@ -1,6 +1,6 @@
 package com.epam.company;
 
-import com.epam.company.metadata.CompanyWebService;
+import com.epam.company.metadata.DepartmentWebService;
 import com.epam.company.metadata.EmployeeWebService;
 import org.apache.cxf.Bus;
 import org.apache.cxf.jaxws.EndpointImpl;
@@ -21,14 +21,14 @@ public class AppConfig {
     @Autowired
     private Bus bus;
     @Autowired
-    private CompanyWebService companyWebService;
+    private DepartmentWebService departmentWebService;
     @Autowired
     private EmployeeWebService employeeWebService;
 
     @Bean
     public Endpoint companyWebService() {
-        EndpointImpl endpoint = new EndpointImpl(bus, companyWebService);
-        endpoint.publish("/CompanyWebService");
+        EndpointImpl endpoint = new EndpointImpl(bus, departmentWebService);
+        endpoint.publish("/DepartmentWebService");
         return endpoint;
     }
 
