@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.jws.WebParam;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,6 +43,20 @@ public class EmployeeWebServiceImpl implements EmployeeWebService {
         Long employeeId = employeeService.createEmployee(employee);
         CreateEmployeeResponse response = new CreateEmployeeResponse();
         response.setEmployeeId(employeeId);
+        return response;
+    }
+
+    @Override
+    public UpdateEmployeesInBatchResponse updateEmployeesInBatch(@WebParam(partName = "parameters", name = "updateEmployeesInBatchRequest", targetNamespace = "http://metadata.company.epam.com/") UpdateEmployeesInBatchRequest parameters) {
+        List<EmployeeDTO> employeeDTOs = parameters.getEmployeeDTOs();
+        List<Employee> employees = new ArrayList<>();
+        employeeDTOs.forEach(employeeDTO -> {
+            Employee employee = new Employee();
+            mapper.map(employeeDTO, employee);
+            employees.add(employee);
+        });
+        employeeService.updateEmployeesInBatch(employees);
+        UpdateEmployeesInBatchResponse response = new UpdateEmployeesInBatchResponse();
         return response;
     }
 

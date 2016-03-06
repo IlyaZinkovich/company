@@ -16,13 +16,10 @@
     <xs:complexType name="EmployeeDTO">
         <xs:sequence>
             <xs:element minOccurs="0" name="birthDate" type="xs:string"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" name="departments" nillable="true" type="DepartmentDTO"/>
+            <xs:element minOccurs="0" name="department" type="DepartmentDTO"/>
             <xs:element minOccurs="0" name="employeeId" type="xs:long"/>
             <xs:element minOccurs="0" name="firstName" type="xs:string"/>
             <xs:element minOccurs="0" name="lastName" type="xs:string"/>
-            <xs:sequence>
-                <xs:element minOccurs="0" name="employees" maxOccurs="unbounded" type="DepartmentDTO"/>
-            </xs:sequence>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType abstract="true" name="xmlAdapter">

@@ -46,6 +46,15 @@
             </xs:complexType>
             <xs:complexType name="updateEmployeeResponse">
             </xs:complexType>
+            <xs:element name="updateEmployeesInBatchRequest" type="tns:updateEmployeesInBatchRequest"/>
+            <xs:element name="updateEmployeesInBatchResponse" type="tns:updateEmployeesInBatchResponse"/>
+            <xs:complexType name="updateEmployeesInBatchRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="employeeDTOs" type="tns:EmployeeDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="updateEmployeesInBatchResponse">
+            </xs:complexType>
             <xs:element name="getEmployeesByDepartmentIdRequest" type="tns:getEmployeesByDepartmentIdRequest"/>
             <xs:element name="getEmployeesByDepartmentIdResponse" type="tns:getEmployeesByDepartmentIdResponse"/>
             <xs:complexType name="getEmployeesByDepartmentIdRequest">
@@ -84,6 +93,12 @@
     <wsdl:message name="updateEmployeeResponse">
         <wsdl:part element="ns1:updateEmployeeResponse" name="parameters"/>
     </wsdl:message>
+    <wsdl:message name="updateEmployeesInBatchRequest">
+        <wsdl:part element="ns1:updateEmployeesInBatchRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateEmployeesInBatchResponse">
+        <wsdl:part element="ns1:updateEmployeesInBatchResponse" name="parameters"/>
+    </wsdl:message>
     <wsdl:message name="getEmployeesByDepartmentIdRequest">
         <wsdl:part element="ns1:getEmployeesByDepartmentIdRequest" name="parameters"/>
     </wsdl:message>
@@ -106,6 +121,10 @@
         <wsdl:operation name="updateEmployee">
             <wsdl:input message="ns1:updateEmployeeRequest" name="updateEmployeeRequest"/>
             <wsdl:output message="ns1:updateEmployeeResponse" name="updateEmployeeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateEmployeesInBatch">
+            <wsdl:input message="ns1:updateEmployeesInBatchRequest" name="updateEmployeesInBatchRequest"/>
+            <wsdl:output message="ns1:updateEmployeesInBatchResponse" name="updateEmployeesInBatchResponse"/>
         </wsdl:operation>
         <wsdl:operation name="getEmployeesByDepartmentId">
             <wsdl:input message="ns1:getEmployeesByDepartmentIdRequest" name="getEmployeesByDepartmentIdRequest"/>

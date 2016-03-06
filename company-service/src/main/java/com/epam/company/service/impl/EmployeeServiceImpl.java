@@ -18,23 +18,28 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDAO employeeDAO;
 
     public Employee getEmployeeById(Long employeeId) {
-        return employeeDAO.getOne(employeeId);
+        return employeeDAO.getEmployeeById(employeeId);
     }
 
     public List<Employee> getAllEmployees() {
-        return employeeDAO.findAll();
+        return employeeDAO.getAllEmployees();
     }
 
     public Long createEmployee(Employee employee) {
-        employeeDAO.save(employee);
+        employeeDAO.createEmployee(employee);
         return employee.getEmployeeId();
     }
 
     public void updateEmployee(Employee employee) {
-        employeeDAO.save(employee);
+        employeeDAO.updateEmployee(employee);
     }
 
     public List<Employee> getEmployeesByDepartmentId(Long departmentId) {
-        return employeeDAO.findByDepartmentDepartmentId(departmentId);
+        return employeeDAO.getEmployeesByDepartmentId(departmentId);
+    }
+
+    @Override
+    public void updateEmployeesInBatch(List<Employee> employees) {
+        employeeDAO.updateEmployeesInBatch(employees);
     }
 }

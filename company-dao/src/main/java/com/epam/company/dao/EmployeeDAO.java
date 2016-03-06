@@ -1,17 +1,16 @@
 package com.epam.company.dao;
 
 import com.epam.company.model.Employee;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface EmployeeDAO extends JpaRepository<Employee, Long> {
-
-    @Query("SELECT e FROM Employee e JOIN e.department d WHERE d.id=:departmentId")
-    List<Employee> findByDepartmentDepartmentId(@Param("departmentId") Long departmentId);
-
+public interface EmployeeDAO {
+    Employee getEmployeeById(Long employeeId);
+    List<Employee> getAllEmployees();
+    Long createEmployee(Employee employee);
+    void updateEmployee(Employee employee);
+    List<Employee> getEmployeesByDepartmentId(Long departmentId);
+    void updateEmployeesInBatch(List<Employee> employees);
 }

@@ -38,6 +38,15 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="updateEmployeesInBatch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="updateEmployeesInBatchRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="updateEmployeesInBatchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="getEmployeesByDepartmentId">
             <soap:operation soapAction="" style="document"/>
             <wsdl:input name="getEmployeesByDepartmentIdRequest">
