@@ -12,20 +12,20 @@ import java.util.List;
 public class EmployeeResource {
 
     @Autowired
-    private EmployeeServiceClient employeeServiceClient;
+    private EmployeeServiceClient client;
 
     @GET
     public List<EmployeeDTO> getAllEmployees() {
         GetAllEmployeesRequest request = new GetAllEmployeesRequest();
-        GetAllEmployeesResponse response = employeeServiceClient.getEmployeeWebServiceImplPort().getAllEmployees(request);
+        GetAllEmployeesResponse response = client.getEmployeeWebServiceImplPort().getAllEmployees(request);
         return response.getEmployeeDTOList();
     }
 
     @GET
-    public List<EmployeeDTO> getEmployeesByDepartmentId(@PathParam("companyId") Long departmentId) {
+    public List<EmployeeDTO> getEmployeesByDepartmentId(@QueryParam("departmentId") Long departmentId) {
         GetEmployeesByDepartmentIdRequest request = new GetEmployeesByDepartmentIdRequest();
         request.setDepartmentId(departmentId);
-        GetEmployeesByDepartmentIdResponse response = employeeServiceClient.getEmployeeWebServiceImplPort().getEmployeesByDepartmentId(request);
+        GetEmployeesByDepartmentIdResponse response = client.getEmployeeWebServiceImplPort().getEmployeesByDepartmentId(request);
         return response.getEmployeeDTOList();
     }
 
@@ -34,7 +34,7 @@ public class EmployeeResource {
     public EmployeeDTO getEmployeeById(@PathParam("employeeId") Long employeeId) {
         GetEmployeeByIdRequest request = new GetEmployeeByIdRequest();
         request.setEmployeeId(employeeId);
-        GetEmployeeByIdResponse response = employeeServiceClient.getEmployeeWebServiceImplPort().getEmployeeById(request);
+        GetEmployeeByIdResponse response = client.getEmployeeWebServiceImplPort().getEmployeeById(request);
         return response.getEmployeeDTO();
     }
 
@@ -42,7 +42,7 @@ public class EmployeeResource {
     public Long createEmployee(EmployeeDTO employeeDTO) {
         CreateEmployeeRequest request = new CreateEmployeeRequest();
         request.setEmployeeDTO(employeeDTO);
-        CreateEmployeeResponse response = employeeServiceClient.getEmployeeWebServiceImplPort().createEmployee(request);
+        CreateEmployeeResponse response = client.getEmployeeWebServiceImplPort().createEmployee(request);
         return response.getEmployeeId();
     }
 
@@ -52,6 +52,13 @@ public class EmployeeResource {
         employeeDTO.setEmployeeId(employeeId);
         UpdateEmployeeRequest request = new UpdateEmployeeRequest();
         request.setEmployeeDTO(employeeDTO);
-        UpdateEmployeeResponse response = employeeServiceClient.getEmployeeWebServiceImplPort().updateEmployee(request);
+        UpdateEmployeeResponse response = client.getEmployeeWebServiceImplPort().updateEmployee(request);
+    }
+
+    @POST
+    public void updateEmployees(List<EmployeeDTO> employeeDTOs) {
+        UpdateEmployeesInBatchRequest updateRequest = new UpdateEmployeesInBatchRequest();
+        updateRequest.getEmployeeDTOs().addAll(employeeDTOs);
+        UpdateEmployeesInBatchResponse updateResponse = client.getEmployeeWebServiceImplPort().updateEmployeesInBatch(updateRequest);
     }
 }

@@ -2,31 +2,31 @@ package com.epam.company.rest;
 
 import com.epam.company.metadata.*;
 import com.epam.company.web.DepartmentServiceClient;
-import com.epam.company.web.EmployeeServiceClient;
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import org.apache.cxf.jaxrs.client.WebClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
 import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.Context;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/department")
 @Produces("application/json")
-public class DepartmentRestService {
+public class DepartmentResource {
 
     @Context
     private ResourceContext context;
 
     @Autowired
-    private DepartmentServiceClient departmentServiceClient;
-    @Autowired
-    private EmployeeServiceClient employeeServiceClient;
+    private DepartmentServiceClient client;
 
     @POST
     public Long createDepartment(DepartmentDTO departmentDTO) {
         CreateDepartmentRequest request = new CreateDepartmentRequest();
         request.setDepartmentDTO(departmentDTO);
-        CreateDepartmentResponse response = departmentServiceClient.getDepartmentWebServiceImplPort().createDepartment(request);
+        CreateDepartmentResponse response = client.getDepartmentWebServiceImplPort().createDepartment(request);
         return response.getDepartmentId();
     }
 
@@ -35,14 +35,14 @@ public class DepartmentRestService {
     public DepartmentDTO getDepartmentById(@PathParam("departmentId") Long departmentId) {
         GetDepartmentByIdRequest request = new GetDepartmentByIdRequest();
         request.setDepartmentId(departmentId);
-        GetDepartmentByIdResponse response = departmentServiceClient.getDepartmentWebServiceImplPort().getDepartmentById(request);
+        GetDepartmentByIdResponse response = client.getDepartmentWebServiceImplPort().getDepartmentById(request);
         return  response.getDepartmentDTO();
     }
 
     @GET
     public List<DepartmentDTO> getAllDepartments() {
         GetAllDepartmentsRequest request = new GetAllDepartmentsRequest();
-        GetAllDepartmentsResponse response = departmentServiceClient.getDepartmentWebServiceImplPort().getAllDepartments(request);
+        GetAllDepartmentsResponse response = client.getDepartmentWebServiceImplPort().getAllDepartments(request);
         return response.getDepartmentDTOList();
     }
 
@@ -52,26 +52,35 @@ public class DepartmentRestService {
         departmentDTO.setDepartmentId(departmentId);
         UpdateDepartmentRequest request = new UpdateDepartmentRequest();
         request.setDepartmentDTO(departmentDTO);
-        UpdateDepartmentResponse response = departmentServiceClient.getDepartmentWebServiceImplPort().updateDepartment(request);
+        UpdateDepartmentResponse response = client.getDepartmentWebServiceImplPort().updateDepartment(request);
     }
 
+//    @GET
+//    @Path("/{departmentId}/employees")
+//    public List<EmployeeDTO> getDepartmentEmployees(@PathParam("departmentId") Long departmentId) {
+//        EmployeeResource employeeResource = context.getResource(EmployeeResource.class);
+//        return employeeResource.getEmployeesByDepartmentId(departmentId);
+//    }
+
     @GET
-    @Path("/{departmentId}/employees")
-    public EmployeeResource getDepartmentEmployees() {
-        return context.getResource(EmployeeResource.class);
+    @Path("/{departmentId}/employee")
+    public List<EmployeeDTO> getDepartmentEmployees(@PathParam("departmentId") Long departmentId) {
+        List<Object> providers = new ArrayList<Object>();
+        providers.add(new JacksonJaxbJsonProvider());
+        WebClient client = WebClient.create("http://localhost:8989/", providers);
+        return (List<EmployeeDTO>) client.path("employee").query("departmentId", departmentId)
+                .getCollection(EmployeeDTO.class);
     }
 
     @POST
-    @Path("/{departmentId}/employees")
+    @Path("/{departmentId}/employee")
     public void addEmployeesToDepartment(@PathParam("departmentId") Long departmentId, List<EmployeeDTO> employeeDTOs) {
         GetDepartmentByIdRequest request = new GetDepartmentByIdRequest();
         request.setDepartmentId(departmentId);
-        GetDepartmentByIdResponse response = departmentServiceClient.getDepartmentWebServiceImplPort().getDepartmentById(request);
+        GetDepartmentByIdResponse response = client.getDepartmentWebServiceImplPort().getDepartmentById(request);
         DepartmentDTO departmentDTO = response.getDepartmentDTO();
         employeeDTOs.forEach(employeeDTO -> employeeDTO.setDepartment(departmentDTO));
-        UpdateEmployeesInBatchRequest updateRequest = new UpdateEmployeesInBatchRequest();
-        updateRequest.getEmployeeDTOs().addAll(employeeDTOs);
-        UpdateEmployeesInBatchResponse updateResponse = employeeServiceClient.getEmployeeWebServiceImplPort().updateEmployeesInBatch(updateRequest);
+        WebClient client = WebClient.create("http://localhost:8989/");
+        client.path("employee").accept("application/json").postCollection(employeeDTOs, EmployeeDTO.class);
     }
-
 }

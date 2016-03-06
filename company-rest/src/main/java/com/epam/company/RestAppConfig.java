@@ -1,7 +1,7 @@
 package com.epam.company;
 
 import com.epam.company.filter.SupportCORSFilter;
-import com.epam.company.rest.DepartmentRestService;
+import com.epam.company.rest.DepartmentResource;
 import com.epam.company.rest.EmployeeResource;
 import com.epam.company.web.DepartmentServiceClient;
 import com.epam.company.web.EmployeeServiceClient;
@@ -19,7 +19,9 @@ import org.apache.cxf.validation.BeanValidationFeature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.ext.RuntimeDelegate;
 import java.util.Arrays;
@@ -44,7 +46,7 @@ public class RestAppConfig
     {
         JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(new Application(),
                 JAXRSServerFactoryBean.class);
-        factory.setServiceBeans(Arrays.asList(companyService(), employeeResource()));
+        factory.setServiceBeans(Arrays.asList(departmentResource(), employeeResource()));
         factory.setProviders(Arrays.asList(jsonProvider(), supportCORSFilter()));
         factory.setFeatures(asList(beanValidationFeature()));
         return factory;
@@ -86,14 +88,12 @@ public class RestAppConfig
     }
 
     @Bean
-    public DepartmentRestService companyService()
-    {
-        return new DepartmentRestService();
+    public DepartmentResource departmentResource() {
+        return new DepartmentResource();
     }
 
     @Bean
-    public EmployeeResource employeeResource()
-    {
+    public EmployeeResource employeeResource() {
         return new EmployeeResource();
     }
 
@@ -109,4 +109,8 @@ public class RestAppConfig
         return new BeanValidationFeature();
     }
 
+    @PostConstruct
+    public void init() {
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
 }
