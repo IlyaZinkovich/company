@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Path("/employees")
+@Path("/employee")
 @Produces("application/json")
 public class EmployeeResource {
 
