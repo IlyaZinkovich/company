@@ -1,6 +1,6 @@
 package com.epam.company.service;
 
-import com.epam.company.model.Company;
+import com.epam.company.model.Department;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +14,20 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 @Transactional
-public class CompanyServiceTest {
+public class DepartmentServiceTest {
 
     @Autowired
-    private CompanyService companyService;
+    private DepartmentService departmentService;
 
     @Test
     public void simpleTest() throws Exception {
-        Company company = new Company();
-        company.setName("company");
-        Long id = companyService.createCompany(company);
+        Department department = new Department();
+        department.setName("department");
+        Long id = departmentService.createDepartment(department);
         assertNotNull(id);
-        company.setCompanyId(id);
-        Company persistedCompany = companyService.getCompanyById(id);
-        assertEquals(company, persistedCompany);
+        department.setDepartmentId(id);
+        Department persistedDepartment = departmentService.getDepartmentById(id);
+        assertEquals(department, persistedDepartment);
     }
 
 }

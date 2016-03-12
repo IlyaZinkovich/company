@@ -1,0 +1,93 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://metadata.company.epam.com/" name="DepartmentWebService" targetNamespace="http://metadata.company.epam.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://metadata.company.epam.com/"
+                   elementFormDefault="unqualified" targetNamespace="http://metadata.company.epam.com/" version="1.0">
+            <xs:include schemaLocation="model-types.xsd"/>
+            <xs:element name="DepartmentDTO" type="tns:DepartmentDTO"/>
+            <xs:element name="createDepartmentRequest" type="tns:createDepartmentRequest"/>
+            <xs:element name="createDepartmentResponse" type="tns:createDepartmentResponse"/>
+            <xs:complexType name="createDepartmentRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="departmentDTO" type="tns:DepartmentDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="createDepartmentResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="departmentId" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="getDepartmentByIdRequest" type="tns:getDepartmentByIdRequest"/>
+            <xs:element name="getDepartmentByIdResponse" type="tns:getDepartmentByIdResponse"/>
+            <xs:complexType name="getDepartmentByIdRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="departmentId" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getDepartmentByIdResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="departmentDTO" type="tns:DepartmentDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="getAllDepartmentsRequest" type="tns:getAllDepartmentsRequest"/>
+            <xs:element name="getAllDepartmentsResponse" type="tns:getAllDepartmentsResponse"/>
+            <xs:complexType name="getAllDepartmentsRequest">
+            </xs:complexType>
+            <xs:complexType name="getAllDepartmentsResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="departmentDTOList" type="tns:DepartmentDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="updateDepartmentRequest" type="tns:updateDepartmentRequest"/>
+            <xs:element name="updateDepartmentResponse" type="tns:updateDepartmentResponse"/>
+            <xs:complexType name="updateDepartmentRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="departmentDTO" type="tns:DepartmentDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="updateDepartmentResponse">
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="createDepartmentRequest">
+        <wsdl:part element="ns1:createDepartmentRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="createDepartmentResponse">
+        <wsdl:part element="ns1:createDepartmentResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getDepartmentByIdRequest">
+        <wsdl:part element="ns1:getDepartmentByIdRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getDepartmentByIdResponse">
+        <wsdl:part element="ns1:getDepartmentByIdResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getAllDepartmentsRequest">
+        <wsdl:part element="ns1:getAllDepartmentsRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getAllDepartmentsResponse">
+        <wsdl:part element="ns1:getAllDepartmentsResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateDepartmentRequest">
+        <wsdl:part element="ns1:updateDepartmentRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="updateDepartmentResponse">
+        <wsdl:part element="ns1:updateDepartmentResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="DepartmentWebService">
+        <wsdl:operation name="createDepartment">
+            <wsdl:input message="ns1:createDepartmentRequest" name="createDepartmentRequest"/>
+            <wsdl:output message="ns1:createDepartmentResponse" name="createDepartmentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDepartmentById">
+            <wsdl:input message="ns1:getDepartmentByIdRequest" name="getDepartmentByIdRequest"/>
+            <wsdl:output message="ns1:getDepartmentByIdResponse" name="getDepartmentByIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllDepartments">
+            <wsdl:input message="ns1:getAllDepartmentsRequest" name="getAllDepartmentsRequest"/>
+            <wsdl:output message="ns1:getAllDepartmentsResponse" name="getAllDepartmentsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateDepartment">
+            <wsdl:input message="ns1:updateDepartmentRequest" name="updateDepartmentRequest"/>
+            <wsdl:output message="ns1:updateDepartmentResponse" name="updateDepartmentResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -46,14 +46,23 @@
             </xs:complexType>
             <xs:complexType name="updateEmployeeResponse">
             </xs:complexType>
-            <xs:element name="getEmployeesByCompanyIdRequest" type="tns:getEmployeesByCompanyIdRequest"/>
-            <xs:element name="getEmployeesByCompanyIdResponse" type="tns:getEmployeesByCompanyIdResponse"/>
-            <xs:complexType name="getEmployeesByCompanyIdRequest">
+            <xs:element name="updateEmployeesInBatchRequest" type="tns:updateEmployeesInBatchRequest"/>
+            <xs:element name="updateEmployeesInBatchResponse" type="tns:updateEmployeesInBatchResponse"/>
+            <xs:complexType name="updateEmployeesInBatchRequest">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="companyId" type="xs:long"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="employeeDTOs" type="tns:EmployeeDTO"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:complexType name="getEmployeesByCompanyIdResponse">
+            <xs:complexType name="updateEmployeesInBatchResponse">
+            </xs:complexType>
+            <xs:element name="getEmployeesMatchingCriteriaRequest" type="tns:getEmployeesMatchingCriteriaRequest"/>
+            <xs:element name="getEmployeesMatchingCriteriaResponse" type="tns:getEmployeesMatchingCriteriaResponse"/>
+            <xs:complexType name="getEmployeesMatchingCriteriaRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="employeeCriteria" type="tns:EmployeeCriteriaDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getEmployeesMatchingCriteriaResponse">
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" name="employeeDTOList" type="tns:EmployeeDTO"/>
                 </xs:sequence>
@@ -84,11 +93,17 @@
     <wsdl:message name="updateEmployeeResponse">
         <wsdl:part element="ns1:updateEmployeeResponse" name="parameters"/>
     </wsdl:message>
-    <wsdl:message name="getEmployeesByCompanyIdRequest">
-        <wsdl:part element="ns1:getEmployeesByCompanyIdRequest" name="parameters"/>
+    <wsdl:message name="updateEmployeesInBatchRequest">
+        <wsdl:part element="ns1:updateEmployeesInBatchRequest" name="parameters"/>
     </wsdl:message>
-    <wsdl:message name="getEmployeesByCompanyIdResponse">
-        <wsdl:part element="ns1:getEmployeesByCompanyIdResponse" name="parameters"/>
+    <wsdl:message name="updateEmployeesInBatchResponse">
+        <wsdl:part element="ns1:updateEmployeesInBatchResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeesMatchingCriteriaRequest">
+        <wsdl:part element="ns1:getEmployeesMatchingCriteriaRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeesMatchingCriteriaResponse">
+        <wsdl:part element="ns1:getEmployeesMatchingCriteriaResponse" name="parameters"/>
     </wsdl:message>
     <wsdl:portType name="EmployeeWebService">
         <wsdl:operation name="createEmployee">
@@ -107,9 +122,13 @@
             <wsdl:input message="ns1:updateEmployeeRequest" name="updateEmployeeRequest"/>
             <wsdl:output message="ns1:updateEmployeeResponse" name="updateEmployeeResponse"/>
         </wsdl:operation>
-        <wsdl:operation name="getEmployeesByCompanyId">
-            <wsdl:input message="ns1:getEmployeesByCompanyIdRequest" name="getEmployeesByCompanyIdRequest"/>
-            <wsdl:output message="ns1:getEmployeesByCompanyIdResponse" name="getEmployeesByCompanyIdResponse"/>
+        <wsdl:operation name="updateEmployeesInBatch">
+            <wsdl:input message="ns1:updateEmployeesInBatchRequest" name="updateEmployeesInBatchRequest"/>
+            <wsdl:output message="ns1:updateEmployeesInBatchResponse" name="updateEmployeesInBatchResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeesMatchingCriteria">
+            <wsdl:input message="ns1:getEmployeesMatchingCriteriaRequest" name="getEmployeesMatchingCriteriaRequest"/>
+            <wsdl:output message="ns1:getEmployeesMatchingCriteriaResponse" name="getEmployeesMatchingCriteriaResponse"/>
         </wsdl:operation>
     </wsdl:portType>
 </wsdl:definitions>

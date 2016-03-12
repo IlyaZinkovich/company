@@ -1,10 +1,10 @@
 package com.epam.company;
 
 import com.epam.company.filter.SupportCORSFilter;
-import com.epam.company.rest.CompanyRestService;
+import com.epam.company.rest.DepartmentResource;
 import com.epam.company.rest.EmployeeResource;
-import com.epam.company.web.CompanyWebServiceImplService;
-import com.epam.company.web.EmployeeWebServiceImplService;
+import com.epam.company.web.DepartmentServiceClient;
+import com.epam.company.web.EmployeeServiceClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -19,7 +19,9 @@ import org.apache.cxf.validation.BeanValidationFeature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.ext.RuntimeDelegate;
 import java.util.Arrays;
@@ -44,7 +46,7 @@ public class RestAppConfig
     {
         JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(new Application(),
                 JAXRSServerFactoryBean.class);
-        factory.setServiceBeans(Arrays.asList(companyService(), employeeResource()));
+        factory.setServiceBeans(Arrays.asList(departmentResource(), employeeResource()));
         factory.setProviders(Arrays.asList(jsonProvider(), supportCORSFilter()));
         factory.setFeatures(asList(beanValidationFeature()));
         return factory;
@@ -76,24 +78,22 @@ public class RestAppConfig
     }
 
     @Bean
-    public CompanyWebServiceImplService companyClient() {
-        return new CompanyWebServiceImplService();
+    public DepartmentServiceClient departmentClient() {
+        return new DepartmentServiceClient();
     }
 
     @Bean
-    public EmployeeWebServiceImplService employeeClient() {
-        return new EmployeeWebServiceImplService();
+    public EmployeeServiceClient employeeClient() {
+        return new EmployeeServiceClient();
     }
 
     @Bean
-    public CompanyRestService companyService()
-    {
-        return new CompanyRestService();
+    public DepartmentResource departmentResource() {
+        return new DepartmentResource();
     }
 
     @Bean
-    public EmployeeResource employeeResource()
-    {
+    public EmployeeResource employeeResource() {
         return new EmployeeResource();
     }
 
@@ -109,4 +109,8 @@ public class RestAppConfig
         return new BeanValidationFeature();
     }
 
+    @PostConstruct
+    public void init() {
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+    }
 }

@@ -1,6 +1,6 @@
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://web.company.epam.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://metadata.company.epam.com/" name="EmployeeWebServiceImplService" targetNamespace="http://web.company.epam.com/">
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://web.company.epam.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://metadata.company.epam.com/" name="EmployeeServiceClient" targetNamespace="http://web.company.epam.com/">
     <wsdl:import location="employee-service-types.wsdl" namespace="http://metadata.company.epam.com/"/>
-    <wsdl:binding name="EmployeeWebServiceImplServiceSoapBinding" type="ns1:EmployeeWebService">
+    <wsdl:binding name="EmployeeServiceClientSoapBinding" type="ns1:EmployeeWebService">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="createEmployee">
             <soap:operation soapAction="" style="document"/>
@@ -38,18 +38,27 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="getEmployeesByCompanyId">
+        <wsdl:operation name="updateEmployeesInBatch">
             <soap:operation soapAction="" style="document"/>
-            <wsdl:input name="getEmployeesByCompanyIdRequest">
+            <wsdl:input name="updateEmployeesInBatchRequest">
                 <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="getEmployeesByCompanyIdResponse">
+            <wsdl:output name="updateEmployeesInBatchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeesMatchingCriteria">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getEmployeesMatchingCriteriaRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getEmployeesMatchingCriteriaResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:service name="EmployeeWebServiceImplService">
-        <wsdl:port binding="tns:EmployeeWebServiceImplServiceSoapBinding" name="EmployeeWebServiceImplPort">
+    <wsdl:service name="EmployeeServiceClient">
+        <wsdl:port binding="tns:EmployeeServiceClientSoapBinding" name="EmployeeWebServiceImplPort">
             <soap:address location="http://localhost:8080/EmployeeWebService"/>
         </wsdl:port>
     </wsdl:service>

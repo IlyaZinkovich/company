@@ -1,31 +1,24 @@
 package com.epam.company.rest;
 
 import com.epam.company.metadata.*;
-import com.epam.company.web.EmployeeWebServiceImplService;
+import com.epam.company.web.EmployeeServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
 import java.util.List;
 
-@Path("/employee")
+@Path("/employees")
 @Produces("application/json")
 public class EmployeeResource {
 
     @Autowired
-    private EmployeeWebServiceImplService client;
+    private EmployeeServiceClient client;
 
     @GET
-    public List<EmployeeDTO> getAllEmployees() {
-        GetAllEmployeesRequest request = new GetAllEmployeesRequest();
-        GetAllEmployeesResponse response = client.getEmployeeWebServiceImplPort().getAllEmployees(request);
-        return response.getEmployeeDTOList();
-    }
-
-    @GET
-    public List<EmployeeDTO> getEmployeesByCompanyId(@PathParam("companyId") Long companyId) {
-        GetEmployeesByCompanyIdRequest request = new GetEmployeesByCompanyIdRequest();
-        request.setCompanyId(companyId);
-        GetEmployeesByCompanyIdResponse response = client.getEmployeeWebServiceImplPort().getEmployeesByCompanyId(request);
+    public List<EmployeeDTO> getEmployeesMatchingCriteria(@QueryParam("") EmployeeCriteriaDTO employeeCriteriaDTO) {
+        GetEmployeesMatchingCriteriaRequest request = new GetEmployeesMatchingCriteriaRequest();
+        request.setEmployeeCriteria(employeeCriteriaDTO);
+        GetEmployeesMatchingCriteriaResponse response = client.getEmployeeWebServiceImplPort().getEmployeesMatchingCriteria(request);
         return response.getEmployeeDTOList();
     }
 
@@ -53,5 +46,12 @@ public class EmployeeResource {
         UpdateEmployeeRequest request = new UpdateEmployeeRequest();
         request.setEmployeeDTO(employeeDTO);
         UpdateEmployeeResponse response = client.getEmployeeWebServiceImplPort().updateEmployee(request);
+    }
+
+    @POST
+    public void updateEmployees(List<EmployeeDTO> employeeDTOs) {
+        UpdateEmployeesInBatchRequest updateRequest = new UpdateEmployeesInBatchRequest();
+        updateRequest.getEmployeeDTOs().addAll(employeeDTOs);
+        UpdateEmployeesInBatchResponse updateResponse = client.getEmployeeWebServiceImplPort().updateEmployeesInBatch(updateRequest);
     }
 }

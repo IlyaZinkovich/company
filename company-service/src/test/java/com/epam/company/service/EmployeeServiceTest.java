@@ -1,7 +1,9 @@
 package com.epam.company.service;
 
-import com.epam.company.model.Company;
+import com.epam.company.model.Department;
 import com.epam.company.model.Employee;
+import com.epam.company.model.EmployeeCriteria;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class EmployeeServiceTest {
     private EmployeeService employeeService;
 
     @Autowired
-    private CompanyService companyService;
+    private DepartmentService departmentService;
 
     @Test
     public void simpleTest() throws Exception {
@@ -38,21 +40,23 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testGetEmployeesByCompanyId() throws Exception {
-        Company company = new Company();
+    @Ignore
+    public void testGetEmployeesByDepartmentId() throws Exception {
+        Department department = new Department();
         Employee employee = new Employee();
         employee.setBirthDate(LocalDate.now());
         List<Employee> employees = Arrays.asList(employee);
-        company.setEmployees(employees);
-        Long companyId = companyService.createCompany(company);
-        assertNotNull(companyId);
-        Company persistedCompany = companyService.getCompanyById(companyId);
-        assertNotNull(persistedCompany);
-        assertNotNull(persistedCompany.getEmployees());
-        List<Employee> employeesByCompanyId = employeeService.getEmployeesByCompanyId(companyId);
-        assertNotNull(employeesByCompanyId);
-        assertEquals(1, employeesByCompanyId.size());
-        Employee persistedEmployee = employeesByCompanyId.get(0);
+        Long departmentId = departmentService.createDepartment(department);
+        assertNotNull(departmentId);
+        Department persistedDepartment = departmentService.getDepartmentById(departmentId);
+        assertNotNull(persistedDepartment);
+        employees.forEach(e -> e.setDepartment(persistedDepartment));
+        employeeService.updateEmployeesInBatch(employees);
+        List<Employee> employeesByDepartmentId = employeeService.
+                getEmployeesMatchingCriteria(new EmployeeCriteria.Builder().departmentId(departmentId).build());
+        assertNotNull(employeesByDepartmentId);
+        assertEquals(1, employeesByDepartmentId.size());
+        Employee persistedEmployee = employeesByDepartmentId.get(0);
         assertEquals(employee.getBirthDate(), persistedEmployee.getBirthDate());
     }
 

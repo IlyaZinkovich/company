@@ -2,12 +2,14 @@ package com.epam.company.web;
 
 import com.epam.company.metadata.*;
 import com.epam.company.model.Employee;
+import com.epam.company.model.EmployeeCriteria;
 import com.epam.company.service.EmployeeService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.jws.WebParam;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,19 +37,6 @@ public class EmployeeWebServiceImpl implements EmployeeWebService {
     }
 
     @Override
-    public GetEmployeesByCompanyIdResponse getEmployeesByCompanyId(@WebParam(partName = "parameters", name = "getEmployeesByCompanyIdRequest", targetNamespace = "http://metadata.company.epam.com/") GetEmployeesByCompanyIdRequest parameters) {
-        Long companyId = parameters.getCompanyId();
-        List<Employee> employees = employeeService.getEmployeesByCompanyId(companyId);
-        GetEmployeesByCompanyIdResponse response = new GetEmployeesByCompanyIdResponse();
-        employees.forEach(employee -> {
-            EmployeeDTO employeeDTO = new EmployeeDTO();
-            mapper.map(employee, employeeDTO);
-            response.getEmployeeDTOList().add(employeeDTO);
-        });
-        return response;
-    }
-
-    @Override
     public CreateEmployeeResponse createEmployee(@WebParam(partName = "parameters", name = "createEmployeeRequest", targetNamespace = "http://metadata.company.epam.com/") CreateEmployeeRequest parameters) {
         EmployeeDTO employeeDTO = parameters.getEmployeeDTO();
         Employee employee = new Employee();
@@ -55,6 +44,20 @@ public class EmployeeWebServiceImpl implements EmployeeWebService {
         Long employeeId = employeeService.createEmployee(employee);
         CreateEmployeeResponse response = new CreateEmployeeResponse();
         response.setEmployeeId(employeeId);
+        return response;
+    }
+
+    @Override
+    public UpdateEmployeesInBatchResponse updateEmployeesInBatch(@WebParam(partName = "parameters", name = "updateEmployeesInBatchRequest", targetNamespace = "http://metadata.company.epam.com/") UpdateEmployeesInBatchRequest parameters) {
+        List<EmployeeDTO> employeeDTOs = parameters.getEmployeeDTOs();
+        List<Employee> employees = new ArrayList<>();
+        employeeDTOs.forEach(employeeDTO -> {
+            Employee employee = new Employee();
+            mapper.map(employeeDTO, employee);
+            employees.add(employee);
+        });
+        employeeService.updateEmployeesInBatch(employees);
+        UpdateEmployeesInBatchResponse response = new UpdateEmployeesInBatchResponse();
         return response;
     }
 
@@ -77,6 +80,27 @@ public class EmployeeWebServiceImpl implements EmployeeWebService {
         mapper.map(employeeDTO, employee);
         employeeService.updateEmployee(employee);
         return new UpdateEmployeeResponse();
+    }
+
+    @Override
+    public GetEmployeesMatchingCriteriaResponse getEmployeesMatchingCriteria(@WebParam(partName = "parameters", name = "getEmployeesMatchingCriteriaRequest", targetNamespace = "http://metadata.company.epam.com/") GetEmployeesMatchingCriteriaRequest parameters) {
+        EmployeeCriteriaDTO employeeCriteriaDTO = parameters.getEmployeeCriteria();
+        EmployeeCriteria employeeCriteria = new EmployeeCriteria.Builder()
+                .departmentId(employeeCriteriaDTO.getDepartmentId())
+                .email(employeeCriteriaDTO.getEmail())
+                .firstName(employeeCriteriaDTO.getFirstName())
+                .lastName(employeeCriteriaDTO.getLastName())
+                .location(employeeCriteriaDTO.getLocation())
+                .skip(employeeCriteriaDTO.getSkip())
+                .limit(employeeCriteriaDTO.getLimit()).build();
+        List<Employee> employees = employeeService.getEmployeesMatchingCriteria(employeeCriteria);
+        GetEmployeesMatchingCriteriaResponse response = new GetEmployeesMatchingCriteriaResponse();
+        employees.forEach(employee -> {
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            mapper.map(employee, employeeDTO);
+            response.getEmployeeDTOList().add(employeeDTO);
+        });
+        return response;
     }
 
 }

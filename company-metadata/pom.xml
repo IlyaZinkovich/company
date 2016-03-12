@@ -26,13 +26,23 @@
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>
-                                        ${basedir}/src/main/resources/company-service.wsdl
+                                        ${basedir}/src/main/resources/department-service.wsdl
                                     </wsdl>
+                                    <extraargs>
+                                        <extraarg>-xjc-Xannotate</extraarg>
+                                        <extraarg>-b</extraarg>
+                                        <extraarg>${basedir}/src/main/resources/bindings.xjb</extraarg>
+                                    </extraargs>
                                 </wsdlOption>
                                 <wsdlOption>
                                     <wsdl>
                                         ${basedir}/src/main/resources/employee-service.wsdl
                                     </wsdl>
+                                    <extraargs>
+                                        <extraarg>-xjc-Xannotate</extraarg>
+                                        <extraarg>-b</extraarg>
+                                        <extraarg>${basedir}/src/main/resources/bindings.xjb</extraarg>
+                                    </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>
                         </configuration>
@@ -41,8 +51,29 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jvnet.jaxb2_commons</groupId>
+                        <artifactId>jaxb2-basics-annotate</artifactId>
+                        <version>1.0.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-annotate</artifactId>
+            <version>1.0.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 
 </project>

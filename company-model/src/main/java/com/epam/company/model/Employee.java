@@ -18,9 +18,18 @@ public class Employee implements Serializable {
     private Long employeeId;
     private String firstName;
     private String lastName;
+    private String location;
+    private String email;
     private LocalDate birthDate;
-    @ManyToMany(mappedBy="employees", fetch = FetchType.EAGER)
-    private List<Company> companies;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "DEPARTMENT_EMPLOYEES",
+            joinColumns = @JoinColumn(referencedColumnName = "employeeId", name = "employeeId"),
+            inverseJoinColumns = @JoinColumn(referencedColumnName = "departmentId", name = "departmentId"))
+    private Department department;
+
+    @OneToMany(mappedBy = "employee")
+    private List<ProjectPosition> projectPositions;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -55,12 +64,36 @@ public class Employee implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public List<Company> getCompanies() {
-        return companies;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<ProjectPosition> getProjectPositions() {
+        return projectPositions;
+    }
+
+    public void setProjectPositions(List<ProjectPosition> projectPositions) {
+        this.projectPositions = projectPositions;
     }
 
     @Override
@@ -70,14 +103,16 @@ public class Employee implements Serializable {
 
         Employee employee = (Employee) o;
 
-        if (getEmployeeId() != null ? !getEmployeeId().equals(employee.getEmployeeId()) : employee.getEmployeeId() != null) return false;
+        if (getEmployeeId() != null ? !getEmployeeId().equals(employee.getEmployeeId()) : employee.getEmployeeId() != null)
+            return false;
         if (getFirstName() != null ? !getFirstName().equals(employee.getFirstName()) : employee.getFirstName() != null)
             return false;
         if (getLastName() != null ? !getLastName().equals(employee.getLastName()) : employee.getLastName() != null)
             return false;
-        if (getBirthDate() != null ? !getBirthDate().equals(employee.getBirthDate()) : employee.getBirthDate() != null)
+        if (getLocation() != null ? !getLocation().equals(employee.getLocation()) : employee.getLocation() != null)
             return false;
-        return !(getCompanies() != null ? !getCompanies().equals(employee.getCompanies()) : employee.getCompanies() != null);
+        if (getEmail() != null ? !getEmail().equals(employee.getEmail()) : employee.getEmail() != null) return false;
+        return !(getBirthDate() != null ? !getBirthDate().equals(employee.getBirthDate()) : employee.getBirthDate() != null);
 
     }
 
@@ -86,8 +121,9 @@ public class Employee implements Serializable {
         int result = getEmployeeId() != null ? getEmployeeId().hashCode() : 0;
         result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
         result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
+        result = 31 * result + (getLocation() != null ? getLocation().hashCode() : 0);
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
         result = 31 * result + (getBirthDate() != null ? getBirthDate().hashCode() : 0);
-        result = 31 * result + (getCompanies() != null ? getCompanies().hashCode() : 0);
         return result;
     }
 }

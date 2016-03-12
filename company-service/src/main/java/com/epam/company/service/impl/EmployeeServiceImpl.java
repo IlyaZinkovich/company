@@ -2,6 +2,7 @@ package com.epam.company.service.impl;
 
 import com.epam.company.dao.EmployeeDAO;
 import com.epam.company.model.Employee;
+import com.epam.company.model.EmployeeCriteria;
 import com.epam.company.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,23 +18,28 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDAO employeeDAO;
 
     public Employee getEmployeeById(Long employeeId) {
-        return employeeDAO.getOne(employeeId);
+        return employeeDAO.getEmployeeById(employeeId);
     }
 
     public List<Employee> getAllEmployees() {
-        return employeeDAO.findAll();
+        return employeeDAO.getAllEmployees();
     }
 
     public Long createEmployee(Employee employee) {
-        employeeDAO.save(employee);
+        employeeDAO.createEmployee(employee);
         return employee.getEmployeeId();
     }
 
     public void updateEmployee(Employee employee) {
-        employeeDAO.save(employee);
+        employeeDAO.updateEmployee(employee);
     }
 
-    public List<Employee> getEmployeesByCompanyId(Long companyId) {
-        return employeeDAO.findByCompaniesCompanyId(companyId);
+    public List<Employee> getEmployeesMatchingCriteria(EmployeeCriteria employeeCriteria) {
+        return employeeDAO.getEmployeesMatchingCriteria(employeeCriteria);
+    }
+
+    @Override
+    public void updateEmployeesInBatch(List<Employee> employees) {
+        employeeDAO.updateEmployeesInBatch(employees);
     }
 }
