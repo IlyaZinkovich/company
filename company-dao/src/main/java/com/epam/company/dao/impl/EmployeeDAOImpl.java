@@ -3,6 +3,7 @@ package com.epam.company.dao.impl;
 import com.epam.company.dao.EmployeeDAO;
 import com.epam.company.model.Employee;
 import com.epam.company.model.EmployeeCriteria;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -48,15 +49,16 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public List<Employee> getEmployeesMatchingCriteria(EmployeeCriteria employeeCriteria) {
-        return sessionFactory.getCurrentSession().createCriteria(Employee.class)
-                .add(Restrictions.eq("department.departmentId", employeeCriteria.getDepartmentId()))
-                .add(Restrictions.eq("email", employeeCriteria.getEmail()))
-                .add(Restrictions.eq("firstName", employeeCriteria.getFirstName()))
-                .add(Restrictions.eq("lastName", employeeCriteria.getLastName()))
-                .add(Restrictions.eq("location", employeeCriteria.getLocation()))
-                .setFirstResult(employeeCriteria.getSkip())
-                .setMaxResults(employeeCriteria.getLimit())
-                .list();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Employee.class);
+        if (employeeCriteria.getDepartmentId() != null) criteria.add(Restrictions.eq("department.departmentId",
+                employeeCriteria.getDepartmentId()));
+        if (employeeCriteria.getEmail() != null) criteria.add(Restrictions.eq("email", employeeCriteria.getEmail()));
+        if (employeeCriteria.getFirstName() != null) criteria.add(Restrictions.eq("firstName", employeeCriteria.getFirstName()));
+        if (employeeCriteria.getLastName() != null) criteria.add(Restrictions.eq("lastName", employeeCriteria.getLastName()));
+        if (employeeCriteria.getLocation() != null) criteria.add(Restrictions.eq("location", employeeCriteria.getLocation()));;
+        if (employeeCriteria.getSkip() != null) criteria.setFirstResult(employeeCriteria.getSkip());
+        if (employeeCriteria.getLimit() != null) criteria.setMaxResults(employeeCriteria.getLimit());
+        return criteria.list();
     }
 
     @Override

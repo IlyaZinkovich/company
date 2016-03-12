@@ -21,7 +21,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 
     @Override
     public List<Department> getAllDepartments() {
-        return sessionFactory.getCurrentSession().createQuery("from department").list();
+        return sessionFactory.getCurrentSession().createQuery("from Department").list();
     }
 
     @Override

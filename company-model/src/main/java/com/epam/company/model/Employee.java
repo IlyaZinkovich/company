@@ -22,7 +22,7 @@ public class Employee implements Serializable {
     private String email;
     private LocalDate birthDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(name = "DEPARTMENT_EMPLOYEES",
             joinColumns = @JoinColumn(referencedColumnName = "employeeId", name = "employeeId"),
             inverseJoinColumns = @JoinColumn(referencedColumnName = "departmentId", name = "departmentId"))
