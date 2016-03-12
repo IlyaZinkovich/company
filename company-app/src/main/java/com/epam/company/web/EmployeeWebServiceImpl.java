@@ -2,6 +2,7 @@ package com.epam.company.web;
 
 import com.epam.company.metadata.*;
 import com.epam.company.model.Employee;
+import com.epam.company.model.EmployeeCriteria;
 import com.epam.company.service.EmployeeService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,10 +83,18 @@ public class EmployeeWebServiceImpl implements EmployeeWebService {
     }
 
     @Override
-    public GetEmployeesByDepartmentIdResponse getEmployeesByDepartmentId(@WebParam(partName = "parameters", name = "getEmployeesByDepartmentIdRequest", targetNamespace = "http://metadata.company.epam.com/") GetEmployeesByDepartmentIdRequest parameters) {
-        Long departmentId = parameters.getDepartmentId();
-        List<Employee> employees = employeeService.getEmployeesByDepartmentId(departmentId);
-        GetEmployeesByDepartmentIdResponse response = new GetEmployeesByDepartmentIdResponse();
+    public GetEmployeesMatchingCriteriaResponse getEmployeesMatchingCriteria(@WebParam(partName = "parameters", name = "getEmployeesMatchingCriteriaRequest", targetNamespace = "http://metadata.company.epam.com/") GetEmployeesMatchingCriteriaRequest parameters) {
+        EmployeeCriteriaDTO employeeCriteriaDTO = parameters.getEmployeeCriteria();
+        EmployeeCriteria employeeCriteria = new EmployeeCriteria.Builder()
+                .departmentId(employeeCriteriaDTO.getDepartmentId())
+                .email(employeeCriteriaDTO.getEmail())
+                .firstName(employeeCriteriaDTO.getFirstName())
+                .lastName(employeeCriteriaDTO.getLastName())
+                .location(employeeCriteriaDTO.getLocation())
+                .skip(employeeCriteriaDTO.getSkip())
+                .limit(employeeCriteriaDTO.getLimit()).build();
+        List<Employee> employees = employeeService.getEmployeesMatchingCriteria(employeeCriteria);
+        GetEmployeesMatchingCriteriaResponse response = new GetEmployeesMatchingCriteriaResponse();
         employees.forEach(employee -> {
             EmployeeDTO employeeDTO = new EmployeeDTO();
             mapper.map(employee, employeeDTO);

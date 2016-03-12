@@ -29,12 +29,10 @@ public class DepartmentDAOTest {
         department.setName("department");
         Employee employee = new Employee();
         employee.setBirthDate(LocalDate.now());
-        department.getEmployees().add(employee);
-        departmentDAO.save(department);
+        departmentDAO.createDepartment(department);
         Long id = department.getDepartmentId();
         assertNotNull(id);
-        Department persistedDepartment = departmentDAO.findOne(id);
+        Department persistedDepartment = departmentDAO.getDepartmentById(id);
         assertEquals(department.getName(), persistedDepartment.getName());
-        assertEquals(department.getEmployees(), persistedDepartment.getEmployees());
     }
 }

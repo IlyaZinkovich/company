@@ -1,9 +1,12 @@
 package com.epam.company.dao;
 
 import com.epam.company.model.Department;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface DepartmentDAO extends JpaRepository<Department, Long> {
+import java.util.List;
+
+public interface DepartmentDAO {
+    Department getDepartmentById(Long departmentId);
+    List<Department> getAllDepartments();
+    Long createDepartment(Department department);
+    void updateDepartment(Department department);
 }

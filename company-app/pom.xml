@@ -29,7 +29,7 @@
                                 <bannedDependencies>
                                     <excludes>
                                         <exclude>log4j</exclude>
-                                        <!--<exclude>commons-logging</exclude>-->
+                                        <exclude>commons-logging</exclude>
                                         <exclude>org.apache.commons:springsource.org.apache.commons.logging</exclude>
                                         <exclude>org.slf4j:slf4j-jcl</exclude>
                                         <exclude>org.slf4j:slf4j-jdk14</exclude>
@@ -144,11 +144,6 @@
             <groupId>com.epam</groupId>
             <artifactId>company-model</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>${spring.data.jpa.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

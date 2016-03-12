@@ -47,12 +47,12 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="getEmployeesByDepartmentId">
+        <wsdl:operation name="getEmployeesMatchingCriteria">
             <soap:operation soapAction="" style="document"/>
-            <wsdl:input name="getEmployeesByDepartmentIdRequest">
+            <wsdl:input name="getEmployeesMatchingCriteriaRequest">
                 <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="getEmployeesByDepartmentIdResponse">
+            <wsdl:output name="getEmployeesMatchingCriteriaResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>

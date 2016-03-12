@@ -13,10 +13,6 @@
     <mapping>
         <class-a>com.epam.company.metadata.DepartmentDTO</class-a>
         <class-b>com.epam.company.model.Department</class-b>
-        <field-exclude>
-            <a>employees</a>
-            <b>employees</b>
-        </field-exclude>
     </mapping>
 
     <mapping>

@@ -18,22 +18,21 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getDepartmentById(Long departmentId) {
-        return departmentDAO.findOne(departmentId);
+        return departmentDAO.getDepartmentById(departmentId);
     }
 
     @Override
     public List<Department> getAllDepartments() {
-        return departmentDAO.findAll();
+        return departmentDAO.getAllDepartments();
     }
 
     @Override
     public Long createDepartment(Department department) {
-        departmentDAO.save(department);
-        return department.getDepartmentId();
+        return departmentDAO.createDepartment(department);
     }
 
     @Override
     public void updateDepartment(Department department) {
-        departmentDAO.save(department);
+        departmentDAO.updateDepartment(department);
     }
 }

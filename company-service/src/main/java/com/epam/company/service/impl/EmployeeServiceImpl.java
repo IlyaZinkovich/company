@@ -2,6 +2,7 @@ package com.epam.company.service.impl;
 
 import com.epam.company.dao.EmployeeDAO;
 import com.epam.company.model.Employee;
+import com.epam.company.model.EmployeeCriteria;
 import com.epam.company.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +34,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeDAO.updateEmployee(employee);
     }
 
-    public List<Employee> getEmployeesByDepartmentId(Long departmentId) {
-        return employeeDAO.getEmployeesByDepartmentId(departmentId);
+    public List<Employee> getEmployeesMatchingCriteria(EmployeeCriteria employeeCriteria) {
+        return employeeDAO.getEmployeesMatchingCriteria(employeeCriteria);
     }
 
     @Override

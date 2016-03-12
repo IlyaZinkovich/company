@@ -11,6 +11,7 @@
             <xs:element minOccurs="0" name="name" type="xs:string"/>
             <xs:element minOccurs="0" name="postalCode" type="xs:string"/>
             <xs:element minOccurs="0" name="stateCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="parentDepartmentId" type="xs:long"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="EmployeeDTO">
@@ -20,6 +21,17 @@
             <xs:element minOccurs="0" name="employeeId" type="xs:long"/>
             <xs:element minOccurs="0" name="firstName" type="xs:string"/>
             <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EmployeeCriteriaDTO">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="departmentId" type="xs:long"/>
+            <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+            <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+            <xs:element minOccurs="0" name="location" type="xs:string"/>
+            <xs:element minOccurs="0" name="email" type="xs:string"/>
+            <xs:element minOccurs="0" name="skip" type="xs:int"/>
+            <xs:element minOccurs="0" name="limit" type="xs:int"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType abstract="true" name="xmlAdapter">

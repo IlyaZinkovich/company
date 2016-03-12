@@ -2,62 +2,78 @@ package com.epam.company.dao.impl;
 
 import com.epam.company.dao.EmployeeDAO;
 import com.epam.company.model.Employee;
+import com.epam.company.model.EmployeeCriteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.io.Serializable;
 import java.util.List;
 
-@Component
+@Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     private final int batchSize = 5;
 
     @Override
     public Employee getEmployeeById(Long employeeId) {
-        return entityManager.find(Employee.class, employeeId);
+        return sessionFactory.getCurrentSession().get(Employee.class, employeeId);
     }
 
     @Override
     public List<Employee> getAllEmployees() {
-        Query query = entityManager.createQuery("SELECT e FROM Employee e");
-        return query.getResultList();
+        return sessionFactory.getCurrentSession().createQuery("from Employee").list();
     }
 
     @Override
     public Long createEmployee(Employee employee) {
-        entityManager.persist(employee);
-        return employee.getEmployeeId();
+        return (Long) sessionFactory.getCurrentSession().save(employee);
     }
 
     @Override
     public void updateEmployee(Employee employee) {
-        entityManager.merge(employee);
+        sessionFactory.getCurrentSession().saveOrUpdate(employee);
     }
 
     @Override
-    public List<Employee> getEmployeesByDepartmentId(Long departmentId) {
-        Query query = entityManager.createQuery("SELECT e FROM Employee e JOIN e.department d WHERE d.id=:departmentId");
-        query.setParameter("departmentId", departmentId);
-        return query.getResultList();
+    public List<Employee> getEmployeesMatchingCriteria(EmployeeCriteria employeeCriteria) {
+        return sessionFactory.getCurrentSession().createCriteria(Employee.class)
+                .add(Restrictions.eq("department.departmentId", employeeCriteria.getDepartmentId()))
+                .add(Restrictions.eq("email", employeeCriteria.getEmail()))
+                .add(Restrictions.eq("firstName", employeeCriteria.getFirstName()))
+                .add(Restrictions.eq("lastName", employeeCriteria.getLastName()))
+                .add(Restrictions.eq("location", employeeCriteria.getLocation()))
+                .setFirstResult(employeeCriteria.getSkip())
+                .setMaxResults(employeeCriteria.getLimit())
+                .list();
     }
 
     @Override
     public void updateEmployeesInBatch(List<Employee> employees) {
         int currentBatchSize = 0;
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
         for (Employee employee : employees) {
-            entityManager.merge(employee);
+            session.saveOrUpdate(employee);
             currentBatchSize++;
             if (currentBatchSize % batchSize == 0) {
-                entityManager.flush();
-                entityManager.clear();
+                session.flush();
+                session.clear();
             }
         }
+        tx.commit();
+        session.close();
     }
 
 }

@@ -23,14 +23,9 @@ public class Department implements Serializable {
     private String cityName;
     private String stateCode;
     private String postalCode;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(joinColumns = @JoinColumn(referencedColumnName = "departmentId", name = "departmentId"),
-            inverseJoinColumns = @JoinColumn(referencedColumnName = "employeeId", name = "employeeId"))
-    private List<Employee> employees;
+    private Long parentDepartmentId;
 
     public Department() {
-        this.employees = new ArrayList<Employee>();
     }
 
     public Long getDepartmentId() {
@@ -103,14 +98,6 @@ public class Department implements Serializable {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
     }
 
     @Override

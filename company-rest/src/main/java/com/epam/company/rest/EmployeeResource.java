@@ -21,11 +21,17 @@ public class EmployeeResource {
         return response.getEmployeeDTOList();
     }
 
+//    @GET
+//    public List<EmployeeDTO> getEmployeesMatchingCriteria(@QueryParam("departmentId") Long departmentId,
+//                                                          @QueryParam("firstName") String firstName,
+//                                                          @QueryParam("lastName") String lastName,
+//                                                          @QueryParam("skip") Integer skip,
+//                                                        @QueryParam("limit") Integer limit) {
     @GET
-    public List<EmployeeDTO> getEmployeesByDepartmentId(@QueryParam("departmentId") Long departmentId) {
-        GetEmployeesByDepartmentIdRequest request = new GetEmployeesByDepartmentIdRequest();
-        request.setDepartmentId(departmentId);
-        GetEmployeesByDepartmentIdResponse response = client.getEmployeeWebServiceImplPort().getEmployeesByDepartmentId(request);
+    public List<EmployeeDTO> getEmployeesMatchingCriteria(@BeanParam EmployeeCriteriaDTO employeeCriteriaDTO) {
+        GetEmployeesMatchingCriteriaRequest request = new GetEmployeesMatchingCriteriaRequest();
+        request.setEmployeeCriteria(employeeCriteriaDTO);
+        GetEmployeesMatchingCriteriaResponse response = client.getEmployeeWebServiceImplPort().getEmployeesMatchingCriteria(request);
         return response.getEmployeeDTOList();
     }
 
