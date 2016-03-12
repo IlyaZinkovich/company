@@ -7,26 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.*;
 import java.util.List;
 
-@Path("/employee")
+@Path("/employees")
 @Produces("application/json")
 public class EmployeeResource {
 
     @Autowired
     private EmployeeServiceClient client;
 
-//    @GET
-//    public List<EmployeeDTO> getAllEmployees() {
-//        GetAllEmployeesRequest request = new GetAllEmployeesRequest();
-//        GetAllEmployeesResponse response = client.getEmployeeWebServiceImplPort().getAllEmployees(request);
-//        return response.getEmployeeDTOList();
-//    }
-
-//    @GET
-//    public List<EmployeeDTO> getEmployeesMatchingCriteria(@QueryParam("departmentId") Long departmentId,
-//                                                          @QueryParam("firstName") String firstName,
-//                                                          @QueryParam("lastName") String lastName,
-//                                                          @QueryParam("skip") Integer skip,
-//                                                        @QueryParam("limit") Integer limit) {
     @GET
     public List<EmployeeDTO> getEmployeesMatchingCriteria(@QueryParam("") EmployeeCriteriaDTO employeeCriteriaDTO) {
         GetEmployeesMatchingCriteriaRequest request = new GetEmployeesMatchingCriteriaRequest();
