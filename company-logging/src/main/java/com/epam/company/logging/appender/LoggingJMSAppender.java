@@ -1,24 +1,20 @@
 package com.epam.company.logging.appender;
 
-
-import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
+import com.epam.company.logging.client.LoggingJMSClient;
+import com.epam.company.logging.dao.LoggingDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class LoggingJMSAppender extends AppenderBase<ILoggingEvent> {
 
-    private PatternLayoutEncoder encoder;
+    @Autowired
+    private LoggingJMSClient loggingJMSClient;
 
     @Override
     protected void append(ILoggingEvent iLoggingEvent) {
-
+        String message = iLoggingEvent.getMessage();
+        loggingJMSClient.sendMessage(message);
     }
 
-    public PatternLayoutEncoder getEncoder() {
-        return encoder;
-    }
-
-    public void setEncoder(PatternLayoutEncoder encoder) {
-        this.encoder = encoder;
-    }
 }
