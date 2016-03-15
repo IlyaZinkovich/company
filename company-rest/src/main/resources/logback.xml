@@ -1,0 +1,58 @@
+<configuration debug="true">
+    <jmxConfigurator />
+
+    <property name="pattern" value="%d{yyyy.MM.dd HH:mm:ss.SSS z}-[id:%X{requestId}][host:%X{req.remoteHost}] [%thread] %-5level %lo{1}.%M[%L] - %msg%n" />
+    <property name="logdir" value="/local/logs/server" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${pattern}</pattern>
+        </encoder>
+
+        <file>${logdir}/company-rest.log</file>
+
+        <!-- When rolling over, renames files according to a fixed window algorithm as described below
+            Archives the log files if the rolling happened, naming them from 1 to 10
+            Creates new file company-rest.log for appending
+        -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>${logdir}/company-rest.%i.log.zip</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+
+        <!-- If the file size exceeds 100MB trigger the rolling policy-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="STDOUT" />
+    </appender>
+
+    <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="FILE" />
+    </appender>
+
+    <logger name="com.epam.company.Logger" level="DEBUG"/>
+    <logger name="org.apache.cxf" level="WARN"/>
+
+    <root>
+        <level value="INFO" />
+        <appender-ref ref="ASYNCSTDOUT" />
+        <appender-ref ref="ASYNCFILE" />
+    </root>
+
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+</configuration>

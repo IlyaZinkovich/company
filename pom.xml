@@ -15,6 +15,7 @@
         <module>company-metadata</module>
         <module>company-app</module>
         <module>company-rest</module>
+        <module>company-logging</module>
     </modules>
 
     <properties>
@@ -38,27 +39,9 @@
         <hibernate.jpa.version>1.0.0.Final</hibernate.jpa.version>
         <dozer.version>5.5.1</dozer.version>
         <dbcp.version>2.1.1</dbcp.version>
+        <activemq.version>5.13.2</activemq.version>
+        <mongodb-driver.version>3.2.2</mongodb-driver.version>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-                <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jul-to-slf4j</artifactId>
-                    <version>${slf4j.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jcl-over-slf4j</artifactId>
-                    <version>${slf4j.version}</version>
-                </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>
