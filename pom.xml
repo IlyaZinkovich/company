@@ -15,6 +15,7 @@
         <module>company-metadata</module>
         <module>company-app</module>
         <module>company-rest</module>
+        <module>company-static</module>
     </modules>
 
     <properties>
