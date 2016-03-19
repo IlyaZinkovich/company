@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("com.epam.company")
+@ComponentScan("com.epam.company.dao")
 @PropertySource("classpath:application.properties")
 public class DaoConfig {
 

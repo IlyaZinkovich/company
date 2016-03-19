@@ -45,8 +45,8 @@
         <appender-ref ref="FILE" />
     </appender>
 
-    <logger name="com.epam.company.Logger" level="DEBUG"/>
-    <logger name="org.apache.cxf" level="WARN"/>
+    <logger name="com.epam.company" level="WARN"/>
+    <logger name="org.apache.cxf" level="WARN" />
 
     <root>
         <level value="INFO" />
