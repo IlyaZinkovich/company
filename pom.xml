@@ -16,6 +16,7 @@
         <module>company-app</module>
         <module>company-rest</module>
         <module>company-logging</module>
+        <module>company-statistics</module>
     </modules>
 
     <properties>

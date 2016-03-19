@@ -1,6 +1,6 @@
-package com.epam.company.logging.dao.impl;
+package com.epam.company.dao.impl;
 
-import com.epam.company.logging.dao.LoggingDAO;
+import com.epam.company.dao.LoggingDAO;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;

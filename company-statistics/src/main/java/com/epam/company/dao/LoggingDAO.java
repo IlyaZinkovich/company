@@ -1,4 +1,4 @@
-package com.epam.company.logging.dao;
+package com.epam.company.dao;
 
 
 public interface LoggingDAO {
