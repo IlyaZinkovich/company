@@ -5,17 +5,15 @@ import com.epam.company.metadata.EmployeeWebService;
 import org.apache.cxf.Bus;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.*;
 
 import javax.xml.ws.Endpoint;
 
 @Configuration
 @ImportResource(locations = {"classpath:META-INF/cxf/cxf.xml",
         "classpath:META-INF/cxf/cxf-servlet.xml"})
-@ComponentScan("com.epam.company")
+@ComponentScan(basePackages = {"com.epam.company.web", "com.epam.company.metadata"})
+@Import(value = {ServiceConfig.class})
 public class AppConfig {
 
     @Autowired

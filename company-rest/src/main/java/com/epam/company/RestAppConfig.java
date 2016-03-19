@@ -19,6 +19,7 @@ import org.apache.cxf.validation.BeanValidationFeature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import javax.annotation.PostConstruct;
@@ -29,7 +30,7 @@ import java.util.Arrays;
 import static java.util.Arrays.asList;
 
 @Configuration
-@ComponentScan(basePackages = "com.epam.company")
+@ComponentScan(basePackages = "com.epam.company.rest")
 public class RestAppConfig
 {
 
