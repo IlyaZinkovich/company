@@ -1,4 +1,4 @@
-angular.module('companyApp', [])
+angular.module('companyApp', ['ngResource'])
 	.controller('DepartmentController', ['DepartmentService', function(departmentService) {
 		var self = this;
 
@@ -12,6 +12,10 @@ angular.module('companyApp', [])
 		self.update = function(dept) {
 			dept.name = "lalala"
 		};
+		self.getDepartmentById = function(departmentId) {
+			departmentService.getById(departmentId);
+		};
+
 	}])
 	.factory('DepartmentService', [function() {
 		var departments = [
@@ -24,6 +28,9 @@ angular.module('companyApp', [])
 				return departments;
 			},
 			create: function(department) {
+				departments.push(department);
+			},
+			getById: function(id) {
 				departments.push(department);
 			}
 		};
