@@ -12,60 +12,65 @@
 		.department-name.ng-dirty.ng-invalid-minlength {
 			background-color: lightpink;
 		}
+		body {
+			margin: 20px;
+		}
 	</style>
 </head>
 <body>
-
-<div class="container" ng-controller="DepartmentController as ctrl">
-	<div class="row">
+<div class="container" ng-controller="DepartmentsController">
+ 	<div class="row">
 		<div class="col-md-4">
 			<ul class="nav nav-pills nav-stacked">
-				<li ng-repeat="department in ctrl.departments()">
-					<a href="#" ng-bind="department.name"></a>
+				<li ng-repeat="departmentListItem in departments">
+					<a href="#" ng-click="getDepartmentById(departmentListItem.departmentId)">{{departmentListItem.name}}</a>
 				</li>
 			</ul>
 		</div>
+		<div class="col-md-4 panel panel-default" ng-show="department != null">
+			<strong>{{department.name}}</strong>
+		</div>
 		<div class="col-md-4 panel panel-default">
-			<form ng-submit="ctrl.create()" name="departmentForm">
+			<form ng-submit="create()" name="departmentForm">
 				<div class="form-group">
 					<label>Name:</label>
-					<input type="text" class="department-name form-control" name="dname" ng-model="ctrl.department.name" required ng-minlength="4">
+					<input type="text" class="department-name form-control" name="dname" ng-model="departmentToCreate.name" required ng-minlength="4">
 					<span ng-show="departmentForm.dname.$error.required">This is a required field</span>
 					<span ng-show="departmentForm.dname.$error.minlength">Minimum length required is 4</span>
 				</div>
 				<div class="form-group">
 					<label>Address:</label>
-					<input type="text" class="form-control" ng-model="ctrl.department.address">
+					<input type="text" class="form-control" ng-model="departmentToCreate.address">
 				</div>
 				<div class="form-group">
 					<label>Country Code:</label>
-					<input type="text" class="form-control" ng-model="ctrl.department.countryCode">
+					<input type="text" class="form-control" ng-model="departmentToCreate.countryCode">
 				</div>
 				<div class="form-group">
 					<label>Address Line 1:</label>
-					<input type="text" class="form-control" ng-model="ctrl.department.addressLine1">
+					<input type="text" class="form-control" ng-model="departmentToCreate.addressLine1">
 				</div>
 				<div class="form-group">
 					<label>Address Line 2:</label>
-					<input type="text" class="form-control" ng-model="ctrl.department.addressLine2">
+					<input type="text" class="form-control" ng-model="departmentToCreate.addressLine2">
 				</div>
 				<div class="form-group">
 					<label>City Name:</label>
-					<input type="text" class="form-control" ng-model="ctrl.department.cityName">
+					<input type="text" class="form-control" ng-model="departmentToCreate.cityName">
 				</div>
 				<div class="form-group">
 					<label>State Code:</label>
-					<input type="text" class="form-control" ng-model="ctrl.department.stateCode">
+					<input type="text" class="form-control" ng-model="departmentToCreate.stateCode">
 				</div>
 				<div class="form-group">
 					<label>Postal Code:</label>
-					<input type="text" class="form-control" ng-model="ctrl.department.postalCode">
+					<input type="text" class="form-control" ng-model="departmentToCreate.postalCode">
 				</div>
 				<div class="form-group">
 					<label>Parent Department:</label>
-					<div ng-init="ctrl.department.parentDepartment = 'Cobalt Maintenance'">
-						<select class="form-control" ng-model="ctrl.department.parentDepartment"
-							ng-options="department.name for department in ctrl.departments() track by department.id">
+					<div ng-init="departmentToCreate.parentDepartment = ''">
+						<select class="form-control" ng-model="departmentToCreate.parentDepartment"
+							ng-options="dept.name for dept in departments track by dept.id">
 							<option value="">- Choose parent department -</option>
 						</select>
 					</div>
@@ -76,9 +81,10 @@
 	</div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-resource.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
 <script src="js/company-module.js" type="text/javascript"></script>
+<script src="js/departments/departments-service.js" type="text/javascript"></script>
+<script src="js/departments/departments-controller.js" type="text/javascript"></script>
 
 </body>
 </html>
