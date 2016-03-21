@@ -2,6 +2,8 @@ package com.epam.company.rest;
 
 import com.epam.company.metadata.*;
 import com.epam.company.web.DepartmentServiceClient;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
@@ -9,6 +11,7 @@ import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.Context;
 import java.util.List;
 
+@Api(value = "Department Resource")
 @Path("/departments")
 @Produces("application/json")
 public class DepartmentResource {
@@ -20,6 +23,7 @@ public class DepartmentResource {
     private DepartmentServiceClient client;
 
     @POST
+    @ApiOperation(value = "creates department")
     public Long createDepartment(DepartmentDTO departmentDTO) {
         CreateDepartmentRequest request = new CreateDepartmentRequest();
         request.setDepartmentDTO(departmentDTO);

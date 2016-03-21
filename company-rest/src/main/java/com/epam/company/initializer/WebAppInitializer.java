@@ -20,6 +20,7 @@ public class WebAppInitializer extends AbstractContextLoaderInitializer
         ServletRegistration.Dynamic registration = servletContext.addServlet("CXFServlet", new CXFServlet());
         registration.addMapping("/*");
         registration.setLoadOnStartup(1);
+        registration.setInitParameter("static-resources-list", "/swagger/(\\S)+");
     }
 
     @Override

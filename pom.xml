@@ -43,6 +43,7 @@
         <dbcp.version>2.1.1</dbcp.version>
         <activemq.version>5.13.2</activemq.version>
         <mongodb-driver.version>3.2.2</mongodb-driver.version>
+        <swagger-ui.version>2.1.4</swagger-ui.version>
     </properties>
 
     <build>

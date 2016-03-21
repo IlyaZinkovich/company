@@ -19,7 +19,7 @@ angular.module('companyApp').controller('DepartmentsController', ['$scope', 'Dep
     };
 
     $scope.update = function(dept) {
-        dept.name = "lalala"
+        dept.name = ""
     };
     
     $scope.getDepartmentById = function(departmentId) {

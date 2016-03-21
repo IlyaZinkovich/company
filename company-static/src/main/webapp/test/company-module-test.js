@@ -15,6 +15,6 @@ describe('Controller: DepartmentController', function() {
 	it('should have highlight items based on state', function() {
 		var dept = {id: 1};
 		ctrl.update(dept);
-		expect(dept.name).toEqual("lalala");
+		expect(dept.name).toEqual("");
 	});
 });

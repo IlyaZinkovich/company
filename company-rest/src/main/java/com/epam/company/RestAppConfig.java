@@ -15,6 +15,7 @@ import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
 import org.apache.cxf.validation.BeanValidationFeature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -49,8 +50,15 @@ public class RestAppConfig
                 JAXRSServerFactoryBean.class);
         factory.setServiceBeans(Arrays.asList(departmentResource(), employeeResource()));
         factory.setProviders(Arrays.asList(jsonProvider(), supportCORSFilter()));
-        factory.setFeatures(asList(beanValidationFeature()));
+        factory.setFeatures(asList(beanValidationFeature(), swaggerFeature()));
         return factory;
+    }
+
+    @Bean
+    public Swagger2Feature swaggerFeature() {
+        Swagger2Feature feature = new Swagger2Feature();
+        feature.setBasePath("/api");
+        return feature;
     }
 
     @Bean(destroyMethod = "shutdown")
