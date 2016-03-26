@@ -4,13 +4,13 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<style>
 		.department-name.ng-valid {
-			background-color: green;
+			background-color: #A3C644;
 		}
 		.department-name.ng-dirty.ng-invalid-required {
-			background-color: red;
+			background-color: #B22746;
 		}
 		.department-name.ng-dirty.ng-invalid-minlength {
-			background-color: lightpink;
+			background-color: #8E244D;
 		}
 		body {
 			margin: 20px;
@@ -19,64 +19,100 @@
 </head>
 <body>
 <div class="container" ng-controller="DepartmentsController">
- 	<div class="row">
-		<div class="col-md-4">
-			<ul class="nav nav-pills nav-stacked">
-				<li ng-repeat="departmentListItem in departments">
-					<a href="#" ng-click="getDepartmentById(departmentListItem.departmentId)">{{departmentListItem.name}}</a>
-				</li>
-			</ul>
-		</div>
-		<div class="col-md-4 panel panel-default" ng-show="department != null">
-			<strong>{{department.name}}</strong>
-		</div>
-		<div class="col-md-4 panel panel-default">
-			<form ng-submit="create()" name="departmentForm">
-				<div class="form-group">
-					<label>Name:</label>
-					<input type="text" class="department-name form-control" name="dname" ng-model="departmentToCreate.name" required ng-minlength="4">
-					<span ng-show="departmentForm.dname.$error.required">This is a required field</span>
-					<span ng-show="departmentForm.dname.$error.minlength">Minimum length required is 4</span>
-				</div>
-				<div class="form-group">
-					<label>Address:</label>
-					<input type="text" class="form-control" ng-model="departmentToCreate.address">
-				</div>
-				<div class="form-group">
-					<label>Country Code:</label>
-					<input type="text" class="form-control" ng-model="departmentToCreate.countryCode">
-				</div>
-				<div class="form-group">
-					<label>Address Line 1:</label>
-					<input type="text" class="form-control" ng-model="departmentToCreate.addressLine1">
-				</div>
-				<div class="form-group">
-					<label>Address Line 2:</label>
-					<input type="text" class="form-control" ng-model="departmentToCreate.addressLine2">
-				</div>
-				<div class="form-group">
-					<label>City Name:</label>
-					<input type="text" class="form-control" ng-model="departmentToCreate.cityName">
-				</div>
-				<div class="form-group">
-					<label>State Code:</label>
-					<input type="text" class="form-control" ng-model="departmentToCreate.stateCode">
-				</div>
-				<div class="form-group">
-					<label>Postal Code:</label>
-					<input type="text" class="form-control" ng-model="departmentToCreate.postalCode">
-				</div>
-				<div class="form-group">
-					<label>Parent Department:</label>
-					<div ng-init="departmentToCreate.parentDepartment = ''">
-						<select class="form-control" ng-model="departmentToCreate.parentDepartment"
-							ng-options="dept.name for dept in departments track by dept.id">
-							<option value="">- Choose parent department -</option>
-						</select>
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+		        <h2 class="panel-title">Departments Panel</h3>
+		    </div>
+			<div class="panel-body">
+			 	<div class="row">
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+						        <h3 class="panel-title">Departments Tree</h3>
+							</div>
+							<div class="panel-body">
+								<ul class="nav nav-pills nav-stacked">
+									<li ng-repeat="departmentListItem in departments">
+										<a href="#" ng-click="getDepartmentById(departmentListItem.departmentId)">{{departmentListItem.name}}</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+						        <h3 class="panel-title"  ng-show="department == null">
+									Select Department
+								</h3>
+						        <h3 class="panel-title"  ng-show="department != null">
+									{{department.name}}
+								</h3>
+							</div>
+							<div class="panel-body">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+						        <h3 class="panel-title">
+									Create Department
+								</h3>
+							</div>
+							<div class="panel-body">
+								<form ng-submit="create()" name="departmentForm">
+									<div class="form-group">
+										<label>Name:</label>
+										<input type="text" class="department-name form-control" name="dname" ng-model="departmentToCreate.name" required ng-minlength="4">
+										<span ng-show="departmentForm.dname.$error.required">This is a required field</span>
+										<span ng-show="departmentForm.dname.$error.minlength">Minimum length required is 4</span>
+									</div>
+									<div class="form-group">
+										<label>Address:</label>
+										<input type="text" class="form-control" ng-model="departmentToCreate.address">
+									</div>
+									<div class="form-group">
+										<label>Country Code:</label>
+										<input type="text" class="form-control" ng-model="departmentToCreate.countryCode">
+									</div>
+									<div class="form-group">
+										<label>Address Line 1:</label>
+										<input type="text" class="form-control" ng-model="departmentToCreate.addressLine1">
+									</div>
+									<div class="form-group">
+										<label>Address Line 2:</label>
+										<input type="text" class="form-control" ng-model="departmentToCreate.addressLine2">
+									</div>
+									<div class="form-group">
+										<label>City Name:</label>
+										<input type="text" class="form-control" ng-model="departmentToCreate.cityName">
+									</div>
+									<div class="form-group">
+										<label>State Code:</label>
+										<input type="text" class="form-control" ng-model="departmentToCreate.stateCode">
+									</div>
+									<div class="form-group">
+										<label>Postal Code:</label>
+										<input type="text" class="form-control" ng-model="departmentToCreate.postalCode">
+									</div>
+									<div class="form-group">
+										<label>Parent Department:</label>
+										<div ng-init="departmentToCreate.parentDepartment = ''">
+											<select class="form-control" ng-model="departmentToCreate.parentDepartment"
+												ng-options="dept.name for dept in departments track by dept.id">
+												<option value="">- Choose parent department -</option>
+											</select>
+										</div>
+									</div>
+									<input type="submit" value="Create">
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
-				<input type="submit" value="Create">
-			</form>
+			</div>
 		</div>
 	</div>
 </div>

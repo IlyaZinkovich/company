@@ -9,10 +9,18 @@ angular.module('companyApp').controller('DepartmentsController', ['$scope', 'Dep
     });
 
     $scope.create = function() {
-        $scope.departmentToCreate.parentDepartmentId = $scope.departmentToCreate.parentDepartment.departmentId;
-        delete $scope.departmentToCreate.parentDepartment;
+        if ($scope.departmentToCreate.parentDepartment != null) {
+            $scope.departmentToCreate.parentDepartmentId = $scope.departmentToCreate.parentDepartment.departmentId;
+            delete $scope.departmentToCreate.parentDepartment;
+        }
         departmentsService.create($scope.departmentToCreate).then(function(success) {
-            $scope.departments.push($scope.departmentToCreate);
+            var departmentId = success.data;
+            departmentsService.getById(departmentId).then(function(success) {
+                var department = success.data;
+                $scope.departments.push(department);
+            }, function(error) {
+                console.error(error);
+            })
         }, function(error) {
             console.error(error);
         });
@@ -21,7 +29,7 @@ angular.module('companyApp').controller('DepartmentsController', ['$scope', 'Dep
     $scope.update = function(dept) {
         dept.name = ""
     };
-    
+
     $scope.getDepartmentById = function(departmentId) {
         departmentsService.getById(departmentId).then(function(success) {
             $scope.department = success.data;
